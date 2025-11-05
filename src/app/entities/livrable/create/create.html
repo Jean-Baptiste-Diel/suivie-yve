@@ -1,0 +1,39 @@
+
+  <div class="modal-content" [class.show]="isModalOpen">
+    <h2>Nouveau Livrable</h2>
+    <div class="card-body">
+      <form [formGroup]="livrableForm" (ngSubmit)="ajouterLivrable(livrableForm)" class="create-form">
+        <div class="form-group">
+          <label for="titre">
+            Titre <span class="required">*</span>
+          </label>
+          <input
+            id="titre"
+            type="text"
+            formControlName="titre"
+            placeholder="Entrez le titre du livrable">
+        </div>
+
+        <div class="form-group">
+          <label for="fichier">Fichier</label>
+          <input
+            id="fichier"
+            type="file"
+            (change)="onFileSelected($event)"
+            formControlName="fichier"
+            placeholder="Nom du fichier">
+        </div>
+
+        <div class="create-actions">
+          <button type="submit" [disabled]="!livrableForm.valid" class="btn btn-create">
+            Créer le livrable
+          </button>
+          <button type="button" (click)="fermerModal()" class="close">
+            ↩️ Annuler
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+

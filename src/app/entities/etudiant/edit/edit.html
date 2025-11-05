@@ -1,0 +1,36 @@
+<div class="edit-container">
+  <h2>{{ editMode ? 'Modifier' : 'Détails du' }} Etudiant</h2>
+
+  <form [formGroup]="etudiantForm" (ngSubmit)="updateEtudiant()" *ngIf="etudiant">
+
+    <div class="form-group">
+      <label>Nom *</label>
+      <input type="text" formControlName="nom" class="form-control"
+             [readonly]="!editMode">
+      <div *ngIf="formControls['nom'].invalid && formControls['nom'].touched"
+           class="error-message">
+        Le nom est requis
+      </div>
+    </div>
+
+    <div class="button-group" *ngIf="!editMode">
+      <button type="button" (click)="editEtudiant()" class="btn btn-primary">
+        Modifier
+      </button>
+    </div>
+
+    <div class="button-group" *ngIf="editMode">
+      <button type="submit" [disabled]="!etudiantForm.valid" class="btn btn-success">
+        Enregistrer
+      </button>
+      <button type="button" (click)="cancelEdit()" class="btn btn-secondary">
+        Annuler
+      </button>
+    </div>
+
+  </form>
+
+  <div *ngIf="!etudiant" class="loading">
+    Chargement en cours...
+  </div>
+</div>

@@ -1,0 +1,63 @@
+/* Liste des remarques */
+.remarks-list {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.remark-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  transition: var(--transition);
+  border-left: 4px solid var(--accent-color);
+
+  &:hover {
+    transform: translateX(5px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .remark-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    .remark-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+
+      .author {
+        font-weight: 700;
+        color: var(--primary-color);
+        font-size: 1.1rem;
+      }
+
+      .date {
+        color: var(--gray-color);
+        font-size: 0.9rem;
+      }
+    }
+
+    .project {
+      background: var(--light-color);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      color: var(--gray-color);
+    }
+  }
+
+  .remark-content {
+    color: var(--dark-color);
+    line-height: 1.6;
+    margin: 0;
+    padding: 1rem;
+    background: var(--light-color);
+    border-radius: 8px;
+    border-left: 3px solid var(--success-color);
+  }
+}

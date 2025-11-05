@@ -1,0 +1,63 @@
+<div class="dashboard-container">
+<!-- Barre de navigation -->
+<nav class="navigation-bar">
+  <div class="nav-header">
+    <h1>Espace Admin</h1>
+  </div>
+  <ul class="nav-links">
+    <li [class.active]="activeSection === 'Accueil'"
+        (click)="setActiveSection('Accueil')">
+      <i class="fas fa-clipboard-check"></i>
+      <span>Accueil</span>
+
+    </li>
+    <li [class.active]="activeSection === 'Utilisateur'"
+        (click)="setActiveSection('Utilisateur')">
+      <i class="fas fa-clipboard-check"></i>
+      <span>Utilisateur</span>
+    </li>
+    <li [class.active]="activeSection === 'messagerie'"
+        (click)="setActiveSection('messagerie')">
+      <i class="fas fa-comments"></i>
+      <span>Messagerie</span>
+    </li>
+  </ul>
+</nav>
+  <!-- Contenu principal -->
+  <main class="main-content">
+    @if (activeSection === 'Accueil'){
+      <div class="content-section">
+        <div class="create-actions">
+          <button type="submit" (click)="nagigationPagePlanifierSoutenance()" class="btn btn-create">
+            Planifier soutenance
+          </button>
+          <button type="button" (click)="nagigationPageGenererRapport()" class="btn btn-create">
+            Generer un rapport
+          </button>
+        </div>
+        <app-list></app-list>
+        <br>
+        <app-list-jury></app-list-jury>
+      </div>
+    }
+    @if (activeSection === 'Utilisateur'){
+      <div class="content-section">
+        <div class="create-actions">
+          <button type="submit" (click)="nagigationPageAjouterUtilisateur()" class="btn btn-create">
+            Ajouter un utilisateur
+          </button>
+          <button type="button" (click)="nagigationPageListeUtilisateur()" class="btn btn-create">
+            Liste utilisateur
+          </button>
+        </div>
+        <h1> il faut retirer le formulaire et mettre la liste des utilisateur</h1>
+        <app-utilisateur></app-utilisateur>
+      </div>
+    }
+    @if (activeSection === 'messagerie'){
+      <div class="content-section">
+        <app-create-messagerie></app-create-messagerie>
+      </div>
+    }
+  </main>
+</div>

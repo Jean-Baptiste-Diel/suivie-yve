@@ -1,0 +1,142 @@
+
+:root {
+  --create-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--create-bg);
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.create-container {
+  width: 100%;
+  max-width: 500px;
+}
+
+.create-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.card-header {
+  background: linear-gradient(135deg, #4361ee, #3a0ca3);
+  color: white;
+  padding: 2rem;
+  text-align: center;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.card-header .icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+.create-form .form-group {
+  margin-bottom: 2rem;
+}
+
+.create-form label {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  color: #2d3748;
+  font-size: 1rem;
+}
+
+.create-form .required {
+  color: #f72585;
+  margin-left: 2px;
+}
+
+.create-form input, .create-form textarea {
+  width: 385px;
+  padding: 1rem 1.25rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: #fafafa;
+}
+
+.create-form input:focus, .create-form textarea:focus {
+  outline: none;
+  border-color: #4361ee;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.15);
+  transform: translateY(-1px);
+}
+
+.create-form textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.create-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.btn {
+  padding: 1rem 2.5rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+}
+
+.btn-create {
+  background: linear-gradient(135deg, #4cc9f0, #4361ee);
+  color: white;
+  flex: 1;
+}
+
+.btn-create:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(76, 201, 240, 0.4);
+}
+
+.btn-cancel {
+  background: #e2e8f0;
+  color: #4a5568;
+}
+
+.btn-cancel:hover {
+  background: #cbd5e0;
+}
+
+@media (max-width: 768px) {
+  .create-container {
+    padding: 1rem;
+  }
+
+  .create-actions {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+}

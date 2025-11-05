@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liste des soutenances</title>
+
+</head>
+<body>
+<div class="list-container">
+  <div class="header">
+    <h1>Gestion des Soutenances</h1>
+  </div>
+
+  <div class="content">
+    <div class="header-actions">
+      <h2>Liste des soutenances</h2>
+      <a href="/create" class="btn-add">
+        <span>+</span> Nouvelle soutenance
+      </a>
+    </div>
+    @if (soutenances.length === 0){
+      <div class="empty-state">
+        <div class="empty-icon">📁</div>
+        <h3>Aucun soutenance trouvé</h3>
+        <p>Commencez par plannifier...</p>
+      </div>
+    }
+    @if (soutenances.length > 0){
+      <table class="data-table">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>NOM</th>
+          <th>Date de création</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+          @for (soutenance of soutenances; track soutenance.id){
+            <tr>
+              <td data-label="Titre">{{ soutenance.id }}</td>
+              <td data-label="Fichier">{{ soutenance.nom }}</td>
+              <td data-label="Actions">
+                <div class="actions">
+                  <a [routerLink]="['/edit', soutenance.id]" class="btn btn-edit">✏️ Modifier</a>
+                  <a [routerLink]="['/details', soutenance.id]" class="btn btn-view">👁️ Voir</a>
+                  <button (click)="deleteSoutenance(soutenance.id)" class="btn btn-delete">🗑️ Supprimer</button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+
+  </div>
+</div>
+</body>
+</html>

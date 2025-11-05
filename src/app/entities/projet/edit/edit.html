@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modifier la projet</title>
+</head>
+<body>
+<div class="edit-container">
+  <div class="edit-card">
+    <div class="card-header">
+      <h2>{{ editMode ? 'Modifier' : 'Détails du' }} projet</h2>
+    </div>
+
+    <div class="card-body">
+      @if (!projet){
+        <div class="loading">
+          Chargement en cours...
+        </div>
+      }
+      @if (projet){
+        <form [formGroup]="projetForm" (ngSubmit)="updateProjet()" class="edit-form">
+          <div class="form-group">
+            <label for="nom">Nom *</label>
+            <input
+              id="nom"
+              type="text"
+              formControlName="nom"
+              [readonly]="!editMode"
+              [class.is-invalid]="formControls['nom'].invalid && formControls['nom'].touched">
+            @if (formControls['nom'].invalid && formControls['nom'].touched){
+              <div  class="error-message">
+                Le nom est requis
+              </div>
+            }
+          </div>
+          <!-- Ajouter le reste ici une div pour chaque-->
+          @if (!editMode){
+            <div class="button-group">
+              <button type="button" (click)="editProjet()" class="btn btn-primary">
+                ✏️ Modifier
+              </button>
+            </div>
+          }
+          @else{
+            <div class="button-group">
+              <button type="submit" [disabled]="!projetForm.valid" class="btn btn-primary">
+                💾 Enregistrer
+              </button>
+              <button type="button" (click)="cancelEdit()" class="btn btn-secondary">
+                ❌ Annuler
+              </button>
+            </div>
+          }
+        </form>
+      }
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

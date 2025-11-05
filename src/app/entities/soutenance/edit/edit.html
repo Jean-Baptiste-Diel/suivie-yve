@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modifier la soutenance</title>
+</head>
+<body>
+<div class="edit-container">
+  <div class="edit-card">
+    <div class="card-header">
+      <h2>{{ editMode ? 'Modifier' : 'Détails de la' }} soutenance</h2>
+    </div>
+
+    <div class="card-body">
+      @if (!soutenance){
+        <div class="loading">
+          Chargement en cours...
+        </div>
+      }
+      @if (soutenance){
+        <form [formGroup]="soutenanceForm" (ngSubmit)="updateSoutenance()" class="edit-form">
+          <div class="form-group">
+            <label for="titre">Titre *</label>
+            <input
+              id="titre"
+              type="text"
+              formControlName="titre"
+              [readonly]="!editMode"
+              [class.is-invalid]="formControls['nom'].invalid && formControls['nom'].touched">
+            @if (formControls['nom'].invalid && formControls['nom'].touched){
+              <div  class="error-message">
+                Le nom est requis
+              </div>
+            }
+          </div>
+          <!-- Ajouter le reste ici une div pour chaque-->
+          @if (!editMode){
+            <div class="button-group">
+              <button type="button" (click)="editSoutenance()" class="btn btn-primary">
+                ✏️ Modifier
+              </button>
+            </div>
+          }
+          @else{
+            <div class="button-group">
+              <button type="submit" [disabled]="!soutenanceForm.valid" class="btn btn-primary">
+                💾 Enregistrer
+              </button>
+              <button type="button" (click)="cancelEdit()" class="btn btn-secondary">
+                ❌ Annuler
+              </button>
+            </div>
+          }
+        </form>
+      }
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

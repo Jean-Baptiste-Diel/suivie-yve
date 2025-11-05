@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Détails de la soutenance</title>
+
+</head>
+<body>
+<div class="details-container">
+  <div class="details-card">
+    <div class="card-header">
+      <h2>Détails de la soutenance</h2>
+      <div class="badge">ID: {{ soutenance?.id }}</div>
+    </div>
+
+    <div class="card-body">
+      @if(!soutenance){
+        <div class="loading-details">
+          <div class="spinner"></div>
+          <p>Chargement des détails...</p>
+        </div>
+      }
+      @else{
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">Nom:</span>
+            <span class="info-value">{{ soutenance.nom }}</span>
+          </div>
+        </div>
+      }
+      @if (soutenance){
+        <div class="details-actions">
+          <a [routerLink]="['/edit', soutenance.id]" class="btn btn-edit">
+            ✏️ Modifier
+          </a>
+          <a routerLink="/list" class="btn btn-back">
+            ↩️ Retour à la liste
+          </a>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+</body>
+</html>

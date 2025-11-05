@@ -1,0 +1,48 @@
+<div class="container">
+  @if (monProjet) {
+    <h2>Projets disponibles</h2>
+  }
+  <h2>Mon projet</h2>
+
+  @for (projet of projets; track projet.id) {
+    <div class="projet-row">
+      <p><strong>Titre:</strong> {{ projet?.titre }}</p>
+      <p><strong>Date de soumission:</strong> {{ projet?.date_soumission }}</p>
+      <p><strong>Encadreur:</strong> {{ projet?.encadrant }}</p>
+
+      <div class="actions">
+        <button (click)="ouvrirDetailModal(projet.id)">Détails</button>
+
+        @if (!monProjet) {
+          <button (click)="lier(projet)">S'attribuer</button>
+        }
+        <button (click)="ouvrirFormLivrable(projet.id)">Ajouter un livrable</button>
+      </div>
+    </div>
+  }
+</div>
+
+@if (projets.length === 0){
+  <p>Aucun projet disponible</p>
+}
+<!-- MODAL AJOUTER LIVRABLE -->
+<div class="modal" [class.show]="isFormLivrableModalOpen">
+    <app-create-livrable [projetId]="selectedProjetId"></app-create-livrable>
+</div>
+<!-- MODAL DETAIL -->
+<div class="modal" [class.show]="isDetailModalOpen">
+  <div class="modal-content">
+    <span class="close" (click)="closeDetailModal()">&times;</span>
+    <h2>Détails du projet</h2>
+
+    @if (selectedProjet) {
+      <div>
+        <p><strong>Titre:</strong> {{ selectedProjet.titre }}</p>
+        <p><strong>Description:</strong> {{ selectedProjet.description }}</p>
+        <p><strong>Encadrant:</strong> {{ selectedProjet.encadrant }}</p>
+      </div>
+    } @else {
+      <p>Chargement...</p>
+    }
+  </div>
+</div>

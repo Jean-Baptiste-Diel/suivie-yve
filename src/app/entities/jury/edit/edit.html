@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modifier le jury</title>
+</head>
+<body>
+<div class="edit-container">
+  <div class="edit-card">
+    <div class="card-header">
+      <h2>{{ editMode ? 'Modifier' : 'Détails du' }} Jury</h2>
+    </div>
+
+    <div class="card-body">
+      @if (!jury){
+        <div class="loading">
+          Chargement en cours...
+        </div>
+      }
+      @if (jury){
+        <form [formGroup]="juryForm" (ngSubmit)="updateJury()" class="edit-form">
+          <div class="form-group">
+            <label for="titre">Nom *</label>
+            <input
+              id="nom"
+              type="text"
+              formControlName="nom"
+              [readonly]="!editMode"
+              [class.is-invalid]="formControls['nom'].invalid && formControls['nom'].touched">
+            @if (formControls['nom'].invalid && formControls['nom'].touched){
+              <div class="error-message">
+                Le nom est requis
+              </div>
+            }
+          </div>
+          @if (!editMode){
+            <div class="button-group">
+              <button type="button" (click)="editJury()" class="btn btn-primary">
+                ✏️ Modifier
+              </button>
+            </div>
+          } @else {
+            <div class="button-group">
+              <button type="submit" [disabled]="!juryForm.valid" class="btn btn-primary">
+                💾 Enregistrer
+              </button>
+              <button type="button" (click)="cancelEdit()" class="btn btn-secondary">
+                ❌ Annuler
+              </button>
+            </div>
+          }
+        </form>
+      }
+    </div>
+  </div>
+</div>
+</body>
+</html>

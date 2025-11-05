@@ -1,0 +1,10 @@
+<div *ngIf="etudiant; else loading">
+  <h2>Détails du jury</h2>
+  <p><strong>ID :</strong> {{ etudiant!.id }}</p>
+  <p><strong>nom :</strong> {{ etudiant!.nom }}</p>
+
+</div>
+
+<ng-template #loading>
+  <p>Chargement...</p>
+</ng-template>
