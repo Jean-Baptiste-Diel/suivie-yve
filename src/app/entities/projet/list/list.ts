@@ -86,12 +86,10 @@ export class List implements OnInit {
       error: (err) => console.error('Erreur chargement détail projet', err)
     });
   }
-
   closeDetailModal() {
     this.isDetailModalOpen = false;
     this.selectedProjet = null;
   }
-
   // Modal ajout livrable
   ouvrirFormLivrable(projetId: number | undefined) {
     if (!projetId) return;
