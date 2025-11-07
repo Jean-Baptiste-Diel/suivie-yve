@@ -1,0 +1,64 @@
+
+.user-row {
+  background: rgba(138, 177, 239, 0.22);
+  margin-top: 130px;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-radius: 0.8rem;
+  display: flex;              /* met tout sur une ligne */
+  align-items: center;        /* aligne verticalement */
+  justify-content: space-between; /* espace équilibré (optionnel) */
+  gap: 20px;                  /* espace entre les éléments */
+  padding: 10px;
+  border-bottom: 1px solid #ddd; /* ligne de séparation */
+}
+.user-row p {
+  margin: 0;
+  flex: 1;                    /* prend un espace égal chacun */
+}
+.user-row button {
+  padding: 6px 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.user-row button:hover {
+  background-color: #0056b3;
+}
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5); /* fond sombre */
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.show {
+  display: flex; /* visible quand .show est présent */
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  width: 500px;
+  max-width: 90%;
+}
+
+.close {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}

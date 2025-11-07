@@ -1,0 +1,22 @@
+<!-- Barre de navigation -->
+<app-navigation [(activeSection)]="activeSection"></app-navigation>
+<h3>Liste des utilisateur</h3>
+<div class="user-row">
+  <p>TIBERA</p>
+  <p>Yverline</p>
+  <p>GENIE LOGICIEL</p>
+  <p>Etudiant</p>
+  <p>Licence</p>
+  <button (click)="DetailModal()">
+    voir
+  </button>
+</div>
+<!-- Modal -->
+<div class="modal"
+     [class.show]="ouvrirDetailUtilisateur"
+     (click)="onBackdropClick($event)">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <span class="close" (click)="fermerDetailUtilisateur()">&times;</span>
+    <app-utilisateur-detail></app-utilisateur-detail>
+  </div>
+</div>

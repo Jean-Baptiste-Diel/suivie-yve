@@ -1,0 +1,27 @@
+<!-- Barre de navigation -->
+<nav class="navigation-bar">
+  <div class="nav-header">
+    <h1>Espace Admin</h1>
+  </div>
+  <ul class="nav-links">
+    <li [class.active]="activeSection === 'Accueil'"
+        (click)="setActiveSection('Accueil')">
+      <i class="fas fa-clipboard-check"></i>
+      <span>Accuei</span>
+    </li>
+    <li [class.active]="activeSection === 'Projet'"
+        (click)="setActiveSection('Projet')">
+      <span>Projet</span>
+    </li>
+    <li [class.active]="activeSection === 'Utilisateur'"
+        (click)="setActiveSection('Utilisateur')">
+      <i class="fas fa-clipboard-check"></i>
+      <span>Utilisateur</span>
+    </li>
+    <li [class.active]="activeSection === 'messagerie'"
+        (click)="setActiveSection('messagerie')">
+      <i class="fas fa-comments"></i>
+      <span>Messagerie</span>
+    </li>
+  </ul>
+</nav>
