@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import {Component, forwardRef} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {IUtilisateur, UtilisateurService} from '../../services/utilisateur-service';
+import {AdminDashboardComponent} from '../../dashboard/roles/admin-dashboard/admin-dashboard';
 
 @Component({
   selector: 'app-utilisateur',
   imports: [
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   templateUrl: './utilisateur.html',
   styleUrl: './utilisateur.scss'
@@ -15,8 +16,8 @@ export class Utilisateur {
   utilisateurForm: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private utilisateurService: UtilisateurService
+    private readonly formBuilder: FormBuilder,
+    private readonly utilisateurService: UtilisateurService
   ) {
     this.utilisateurForm = this.formBuilder.group({
       nom: ['', Validators.required],
@@ -32,7 +33,7 @@ export class Utilisateur {
       nom: utilisateurForm.value.nom,
       prenom: utilisateurForm.value.prenom,
       email: utilisateurForm.value.email,
-      motdepasse: utilisateurForm.value.motDePasse,
+      motdepasse: "passer",
       role: utilisateurForm.value.role,
       authentifie: true
     }

@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 
 import { ListMessagerieComponent } from './entities/messagerie/list/list';
 import { DetailMessagerieComponent } from './entities/messagerie/detail/detailMessagerie';
+import {ListUtilisateur} from './entities/utilisateur/list-utilisateur/list-utilisateur';
 
 
 
@@ -20,7 +21,8 @@ export const routes: Routes = [
  { path: 'dashboard-admin', loadComponent: () => import('./dashboard/roles/admin-dashboard/admin-dashboard').then(m => m.AdminDashboardComponent) },
 
   // CRUD utilisateur
-  { path: 'utilisateur', loadComponent: () => import('./entities/utilisateur/utilisateur').then(m => m.Utilisateur) },
+  { path: 'utilisateur-connecter', loadComponent: () => import('./entities/utilisateur/utilisateur').then(m => m.Utilisateur) },
+  { path: 'utilisateurs', loadComponent: () => import('./entities/utilisateur/list-utilisateur/list-utilisateur').then(m => m.ListUtilisateur) },
   // CRUD Étudiants
   { path: 'etudiants', loadComponent: () => import('./entities/etudiant/list/list').then(m => m.List) },
   { path: 'etudiants/create', loadComponent: () => import('./entities/etudiant/create/create').then(m => m.Create) },
@@ -73,7 +75,6 @@ export const routes: Routes = [
   { path: 'messageries/detail/:id', component: DetailMessagerieComponent },
 ];
 [
-
   // CRUD Commentaires
   { path: 'commentaires', loadComponent: () => import('./entities/commentaire/list/listCommentaire').then(m => m.ListCommentaire) },
   { path: 'commentaires/create', loadComponent: () => import('./entities/commentaire/create/create').then(m => m.Create) },

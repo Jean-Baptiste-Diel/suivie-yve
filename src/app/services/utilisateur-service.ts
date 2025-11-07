@@ -14,8 +14,8 @@ export interface IUtilisateur {
   providedIn: 'root'
 })
 export class UtilisateurService {
-  private apiUrl = 'http://127.0.0.1:8000/api';
-  constructor(private http: HttpClient) {
+  private readonly apiUrl = 'http://127.0.0.1:8000/api/utilisateurs';
+  constructor(private readonly http: HttpClient) {
   }
   // Créer un utilisateur
   create(utilisateur: IUtilisateur): Observable<IUtilisateur> {

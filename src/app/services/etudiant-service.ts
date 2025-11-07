@@ -31,7 +31,7 @@ export class EtudiantService {
   }
 
   // S'attribuer un projet (l'étudiant connecté)
-  attribuerProjet(data: { etudiant_id: number | undefined; projet_id: any }): Observable<any> {
+  attribuerProjet(data: { etudiant_id: number | null; projet_id: number }): Observable<any> {
     return this.http.post(`${this.apiUrl}/etudiants/lier-projet/`, data);
   }
 

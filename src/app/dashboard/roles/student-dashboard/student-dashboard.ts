@@ -18,9 +18,7 @@ import{List}from '../../../entities/projet/list/list';
   standalone: true,
   imports: [
     CommonModule,
-    Create,
     Edit,
-    CreateMesssagerie,
     Detail,
     ListCommentaire,
     Notifications,
@@ -39,10 +37,12 @@ export class StudentDashboardComponent implements OnInit {
   constructor(public authService: AuthService) {}
 
   ngOnInit() {
-    const currentUser = this.authService.currentUserValue;
-    if (currentUser) {
-      this.studentName = `${currentUser.prenom} ${currentUser.nom}`;
-      this.studentId = currentUser.id;
+    const id = this.authService.getUtilisateurId();
+    const nom = this.authService.getNom();
+    const prenom = this.authService.getPrenom();
+    if (id) {
+      this.studentName = `${prenom} ${nom}`;
+      this.studentId = id;
     }
   }
 

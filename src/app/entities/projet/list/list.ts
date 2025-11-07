@@ -25,10 +25,10 @@ export class List implements OnInit {
   livrables: Livrable[] = [];
 
   constructor(
-    private projetService: ProjetService,
-    private authService: AuthService,
-    private etudiantService: EtudiantService,
-    private livrableService: LivrableService
+    private readonly projetService: ProjetService,
+    private readonly authService: AuthService,
+    private readonly etudiantService: EtudiantService,
+    private readonly livrableService: LivrableService
   ) {}
 
   ngOnInit(): void {
@@ -38,12 +38,12 @@ export class List implements OnInit {
 
   // Charger tous les projets non attribués ou projet de l'utilisateur
   loadProjetsNonAttribues() {
-    const currentUser = this.authService.currentUserValue;
-    if (!currentUser || !currentUser.id) return;
+    const currentUser = this.authService.getUtilisateurId();
+    if (!currentUser || !currentUser) return;
 
-    this.projetService.getProjetDispo(currentUser.id).subscribe({
+    this.projetService.getProjetDispo(currentUser).subscribe({
       next: (data) => {
-        if (data.length === 1 && data[0].etudiant === currentUser.id) {
+        if (data.length === 1 && data[0].etudiant === currentUser) {
           // L'étudiant a déjà un projet
           this.monProjet = data[0];
           this.projets = [data[0]];
@@ -60,11 +60,11 @@ export class List implements OnInit {
 
   // Lier un projet à l'utilisateur
   lier(projet: Projet) {
-    const currentUser = this.authService.currentUserValue;
+    const currentUser = this.authService.getUtilisateurId();
     if (!projet.id) return;
 
     const data = {
-      etudiant_id: currentUser.id,
+      etudiant_id: currentUser,
       projet_id: projet.id
     };
 

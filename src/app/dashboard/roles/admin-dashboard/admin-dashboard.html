@@ -1,28 +1,6 @@
-<div class="dashboard-container">
-<!-- Barre de navigation -->
-<nav class="navigation-bar">
-  <div class="nav-header">
-    <h1>Espace Admin</h1>
-  </div>
-  <ul class="nav-links">
-    <li [class.active]="activeSection === 'Accueil'"
-        (click)="setActiveSection('Accueil')">
-      <i class="fas fa-clipboard-check"></i>
-      <span>Accueil</span>
-
-    </li>
-    <li [class.active]="activeSection === 'Utilisateur'"
-        (click)="setActiveSection('Utilisateur')">
-      <i class="fas fa-clipboard-check"></i>
-      <span>Utilisateur</span>
-    </li>
-    <li [class.active]="activeSection === 'messagerie'"
-        (click)="setActiveSection('messagerie')">
-      <i class="fas fa-comments"></i>
-      <span>Messagerie</span>
-    </li>
-  </ul>
-</nav>
+<div class="dashboard">
+  <!-- Barre de navigation -->
+  <app-navigation [(activeSection)]="activeSection"></app-navigation>
   <!-- Contenu principal -->
   <main class="main-content">
     @if (activeSection === 'Accueil'){
@@ -35,23 +13,41 @@
             Generer un rapport
           </button>
         </div>
-        <app-list></app-list>
-        <br>
-        <app-list-jury></app-list-jury>
+      </div>
+    }
+    @if (activeSection === 'Projet'){
+      <div class="content-section">
+        <div class="create-actions">
+          <button type="submit" (click)="nagigationPagePlanifierSoutenance()" class="btn btn-create">
+            Ajouter projet
+          </button>
+          <button type="button" (click)="nagigationPageGenererRapport()" class="btn btn-create">
+            Liste projets
+          </button>
+        </div>
       </div>
     }
     @if (activeSection === 'Utilisateur'){
       <div class="content-section">
         <div class="create-actions">
-          <button type="submit" (click)="nagigationPageAjouterUtilisateur()" class="btn btn-create">
+          <button type="submit" (click)="ajouterUtilisateurModal()" class="btn btn-list">
             Ajouter un utilisateur
           </button>
-          <button type="button" (click)="nagigationPageListeUtilisateur()" class="btn btn-create">
-            Liste utilisateur
+          <button type="button"
+                  (click)="nagigationPageListeUtilisateur()"
+                  class="btn btn-list">
+            Liste des utilisateurs
           </button>
         </div>
-        <h1> il faut retirer le formulaire et mettre la liste des utilisateur</h1>
-        <app-utilisateur></app-utilisateur>
+          <!-- Modal -->
+        <div class="modal"
+             [class.show]="ouvrirAjouterUtilisateur"
+             (click)="onBackdropClick($event)">
+            <div class="modal-content" (click)="$event.stopPropagation()">
+              <span class="close" (click)="fermerAjouterUtilisateur()">&times;</span>
+              <app-utilisateur></app-utilisateur>
+            </div>
+        </div>
       </div>
     }
     @if (activeSection === 'messagerie'){

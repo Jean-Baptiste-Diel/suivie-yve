@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { AuthService } from '../core/auth.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -22,7 +22,7 @@ interface ConnexionResponse {
   ],
   styleUrls: ['./dashboard.scss']
 })
-export class Dashboard {
+export class Dashboard implements OnInit {
   role: string | null = null;  // ✅ peut être null si pas connecté
   id: number = 0;
   connexionForm: FormGroup;
@@ -32,9 +32,9 @@ export class Dashboard {
   private erreur!: string;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private router: Router
+    private readonly formBuilder: FormBuilder,
+    private readonly authService: AuthService,
+    private readonly router: Router
   ) {
     this.connexionForm = this.formBuilder.group({
       identifiant: ['', [Validators.required, Validators.email]],
@@ -43,7 +43,7 @@ export class Dashboard {
   }
 
   ngOnInit() {
-    this.role = this.authService.getUserRole(); // ✅ retourne string | null
+    this.role = this.authService.getRole();
   }
 
   seConnecter(connexion: FormGroup) {
@@ -57,7 +57,6 @@ export class Dashboard {
         this.role = data.user.role;
         this.id = data.user.id;
 
-        // ✅ Redirection en fonction du rôle
         if (this.role === 'encadrant') {
           this.router.navigate(['/dashboard-supervisor/']).then();
           console.log('Connecté comme encadrant');
@@ -67,6 +66,9 @@ export class Dashboard {
         } else if (this.role === 'etudiant') {
           this.router.navigate(['/dashboard-student/']).then();
           console.log('Connecté comme étudiant');
+        } else if (this.role === 'admin') {
+          this.router.navigate(['/dashboard-admin/']).then();
+          console.log('Connecté comme admin');
         }
       },
       error: (error: { error: { message: string } }) => {

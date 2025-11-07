@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {List} from '../../../entities/projet/list/list';
 import {ListJury} from '../../../entities/jury/list/listJury';
 import {Utilisateur} from '../../../entities/utilisateur/utilisateur';
 import {CreateMesssagerie} from '../../../entities/messagerie/create/createMesssagerie';
 import {ActivatedRoute, Route, Router} from '@angular/router';
+import {Create} from '../../../entities/livrable/create/create';
+import {Navigation} from '../../../navigation/navigation';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -12,14 +14,34 @@ import {ActivatedRoute, Route, Router} from '@angular/router';
     List,
     ListJury,
     Utilisateur,
-    CreateMesssagerie
+    CreateMesssagerie,
+    Create,
+    Navigation
   ],
   styleUrls: ['./admin-dashboard.scss']
 })
-export class AdminDashboardComponent {
+export class AdminDashboardComponent implements OnInit {
   activeSection: string = 'Accueil';
-constructor(private router: Router) {
-}
+  ouvrirAjouterUtilisateur = false;
+  constructor(private readonly router: Router) {}
+
+  ngOnInit(): void {
+        console.log("diel");
+    }
+
+  ajouterUtilisateurModal() {
+    this.ouvrirAjouterUtilisateur = true;
+  }
+  fermerAjouterUtilisateur() {
+    this.ouvrirAjouterUtilisateur = false;
+  }
+    // Fermer la modal quand on clique sur le fond (backdrop)
+  onBackdropClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (target.classList.contains('modal')) {
+      this.fermerAjouterUtilisateur();
+    }
+  }
   setActiveSection(section: 'Utilisateur' | 'messagerie' | 'Accueil') {
     this.activeSection = section;
   }
@@ -38,6 +60,6 @@ constructor(private router: Router) {
 
   nagigationPageListeUtilisateur() {
   // fais avec un filtre
-    this.router.navigate(['/utilisateur/list']).then();
+    this.router.navigate(['/utilisateurs']).then();
   }
 }
