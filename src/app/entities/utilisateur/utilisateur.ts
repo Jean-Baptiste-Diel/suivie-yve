@@ -23,7 +23,6 @@ export class Utilisateur {
       nom: ['', Validators.required],
       prenom: ['', Validators.required],
       email: [''],
-      motDePasse: ['', Validators.required],
       role: ['', Validators.required],
     });
   }

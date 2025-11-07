@@ -19,7 +19,7 @@ export interface Projet {
   providedIn: 'root'
 })
 export class ProjetService {
-  apiUrl = "http://127.0.0.1:8000/api";
+  apiUrl = "http://127.0.0.1:8000/api/projets";
 
   constructor(private readonly http: HttpClient) { }
 
@@ -29,7 +29,7 @@ export class ProjetService {
   }
   // récupérer des projets disponible pour l'etudiant
   getProjetDispo(etudiantId: number): Observable<Projet[]>{
-    return this.http.get<Projet[]>(`${this.apiUrl}/projets/disponibles/?etudiant_id=${etudiantId}`);
+    return this.http.get<Projet[]>(`${this.apiUrl}/disponibles/?etudiant_id=${etudiantId}`);
   }
   // récupérer un projet(id)
   getById(id: number | undefined): Observable<Projet> {

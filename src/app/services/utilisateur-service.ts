@@ -19,7 +19,7 @@ export class UtilisateurService {
   }
   // Créer un utilisateur
   create(utilisateur: IUtilisateur): Observable<IUtilisateur> {
-    return this.http.post<IUtilisateur>(`${this.apiUrl}/utilisateurs/`, utilisateur);
+    return this.http.post<IUtilisateur>(`${this.apiUrl}/ajouter-utilisateur/`, utilisateur);
   }
 
   // Récupérer tous les utilisateurs
