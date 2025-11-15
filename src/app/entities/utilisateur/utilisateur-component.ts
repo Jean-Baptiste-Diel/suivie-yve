@@ -1,18 +1,17 @@
-import {Component, forwardRef} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {IUtilisateur, UtilisateurService} from '../../services/utilisateur-service';
-import {AdminDashboardComponent} from '../../dashboard/roles/admin-dashboard/admin-dashboard';
+import {UtilisateurService} from '../../services/utilisateur-service';
 
 @Component({
-  selector: 'app-utilisateur',
+  selector: 'app-utilisateur-component',
   imports: [
     FormsModule,
     ReactiveFormsModule,
   ],
-  templateUrl: './utilisateur.html',
-  styleUrl: './utilisateur.scss'
+  templateUrl: './utilisateur-component.html',
+  styleUrl: './utilisateur-component.scss'
 })
-export class Utilisateur {
+export class UtilisateurComponent {
   utilisateurForm: FormGroup;
 
   constructor(
@@ -27,14 +26,13 @@ export class Utilisateur {
     });
   }
 
-  ajouterLivrable(utilisateurForm: FormGroup) {
-    const utilisateur : IUtilisateur = {
+  ajouterUtilisateur(utilisateurForm: FormGroup) {
+    const utilisateur : { nom: string; prenom: string; email: string; motdepasse: string; role: string } = {
       nom: utilisateurForm.value.nom,
       prenom: utilisateurForm.value.prenom,
       email: utilisateurForm.value.email,
       motdepasse: "passer",
       role: utilisateurForm.value.role,
-      authentifie: true
     }
     console.log(utilisateur);
     this.utilisateurService.create(utilisateur).subscribe({

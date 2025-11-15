@@ -5,52 +5,20 @@
   <main class="main-content">
     @if (activeSection === 'Accueil'){
       <div class="content-section">
-        <div class="create-actions">
-          <button type="submit" (click)="nagigationPagePlanifierSoutenance()" class="btn btn-create">
-            Planifier soutenance
-          </button>
-          <button type="button" (click)="nagigationPageGenererRapport()" class="btn btn-create">
-            Generer un rapport
-          </button>
-        </div>
+        <app-list-soutenance></app-list-soutenance>
       </div>
     }
     @if (activeSection === 'Projet'){
       <div class="content-section">
-        <div class="create-actions">
-          <button type="submit" (click)="nagigationPagePlanifierSoutenance()" class="btn btn-create">
-            Ajouter projet
-          </button>
-          <button type="button" (click)="nagigationPageGenererRapport()" class="btn btn-create">
-            Liste projets
-          </button>
-        </div>
+        <app-liste-projet-component></app-liste-projet-component>
       </div>
     }
     @if (activeSection === 'Utilisateur'){
       <div class="content-section">
-        <div class="create-actions">
-          <button type="submit" (click)="ajouterUtilisateurModal()" class="btn btn-list">
-            Ajouter un utilisateur
-          </button>
-          <button type="button"
-                  (click)="nagigationPageListeUtilisateur()"
-                  class="btn btn-list">
-            Liste des utilisateurs
-          </button>
-        </div>
-          <!-- Modal -->
-        <div class="modal"
-             [class.show]="ouvrirAjouterUtilisateur"
-             (click)="onBackdropClick($event)">
-            <div class="modal-content" (click)="$event.stopPropagation()">
-              <span class="close" (click)="fermerAjouterUtilisateur()">&times;</span>
-              <app-utilisateur></app-utilisateur>
-            </div>
-        </div>
+        <app-list-utilisateur></app-list-utilisateur>
       </div>
     }
-    @if (activeSection === 'messagerie'){
+    @if (activeSection === 'Messagerie'){
       <div class="content-section">
         <app-create-messagerie></app-create-messagerie>
       </div>

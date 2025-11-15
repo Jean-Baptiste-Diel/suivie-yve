@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {Soutenance, SoutenanceService} from '../../../services/soutenance-service';
 import {ActivatedRoute} from '@angular/router';
 import {Projet, ProjetService} from '../../../services/projet-service';
 

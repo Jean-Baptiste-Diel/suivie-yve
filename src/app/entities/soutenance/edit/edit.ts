@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {NgIf} from "@angular/common";
-import {Livrable, LivrableService} from '../../../services/livrable-service';
 import {ActivatedRoute} from '@angular/router';
-import {Soutenance, SoutenanceService} from '../../../services/soutenance-service';
+import {Soutenance, SoutenanceService} from '../service/soutenance-service';
 
 @Component({
   selector: 'app-edit',
@@ -35,19 +33,6 @@ export class Edit implements OnInit {
 
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-
-    if (id) {
-      this.soutenanceService.getById(id).subscribe({
-        next: (data) => {
-          this.soutenance = data;
-          // Pré-remplir le formulaire avec les données existantes
-          this.soutenanceForm.patchValue(data);
-        },
-        error: (err) => console.error('Erreur lors du chargement', err)
-      });
-    } else {
-      console.error('ID non trouvé dans les paramètres de route');
-    }
   }
 
   editSoutenance() {
@@ -58,14 +43,6 @@ export class Edit implements OnInit {
   updateSoutenance() {
     if (this.selectedId && this.soutenanceForm.valid) {
       const data: Soutenance = this.soutenanceForm.value;
-      this.soutenanceService.update(this.selectedId, data).subscribe({
-        next: () => {
-          this.cancelEdit();
-          // Recharger les données après mise à jour
-          this.ngOnInit();
-        },
-        error: (err: any) => console.error('Erreur lors de la mise à jour', err)
-      });
     } else {
       console.warn('Formulaire invalide ou ID manquant');
     }

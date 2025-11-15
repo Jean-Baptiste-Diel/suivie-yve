@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { List } from './list';
+import { ListSoutenanceComponent } from './list-soutenance-component';
 
 describe('ListCommentaire', () => {
-  let component: List;
-  let fixture: ComponentFixture<List>;
+  let component: ListSoutenanceComponent;
+  let fixture: ComponentFixture<ListSoutenanceComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [List]
+      imports: [ListSoutenanceComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(List);
+    fixture = TestBed.createComponent(ListSoutenanceComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

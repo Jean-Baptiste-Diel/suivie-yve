@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { MessagerieService, Conversation, Message } from '../../../services/messagerie.service';
+import { MessagerieService, Conversation } from '../../../services/messagerie.service';
 
 @Component({
   selector: 'app-detail-messagerie',

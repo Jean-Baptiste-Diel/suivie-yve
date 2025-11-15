@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nouvelle soutenance</title>
+</head>
+<body>
+<div class="create-container">
+  <div class="create-card">
+    <div class="card-header">
+      <div class="icon">📄</div>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="soutenanceForm" (ngSubmit)="planifier()" class="create-form">
+        <label>Date début</label>
+        <input type="datetime-local" formControlName="date_debut">
+
+        <label>Date fin</label>
+        <input type="datetime-local" formControlName="date_fin">
+
+        <label>Durée (minutes)</label>
+        <input type="number" formControlName="duree">
+
+        <button type="submit" class="btn btn-primary">Planifier</button>
+      </form>
+
+      @if (message){
+        <p>{{ message }}</p>
+      }
+    </div>
+  </div>
+</div>
+</body>
+</html>

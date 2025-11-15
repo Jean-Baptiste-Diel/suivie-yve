@@ -7,7 +7,7 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly apiUrl = 'http://127.0.0.1:8000/api/utilisateurs';
+  private readonly apiUrl = 'http://127.0.0.1:8000/utilisateurs';
 
   private readonly currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
@@ -30,14 +30,11 @@ export class AuthService {
           // ✅ Sauvegarde du token
           localStorage.setItem('access_token', response.access_token);
           localStorage.setItem('refresh_token', response.refresh_token);
-
           // ✅ Sauvegarde de l'utilisateur
           localStorage.setItem('currentUser', JSON.stringify(response.user));
-
           // ✅ Mise à jour du BehaviorSubject
           this.currentUserSubject.next(response.user);
         }
-
         return response;
       })
     );
@@ -46,12 +43,10 @@ export class AuthService {
   getToken(): string | null {
     return localStorage.getItem('access_token');
   }
-
   /** Décoder le token pour lire ses infos */
   private decodeToken(token: string): any {
     const parts = token.split('.');
     if (parts.length !== 3) return null;
-
     try {
       const payload = JSON.parse(atob(parts[1]));
       return payload;
@@ -60,7 +55,6 @@ export class AuthService {
       return null;
     }
   }
-
   /** Récupérer le rôle depuis le token */
   getRole(): string | null {
     const token = this.getToken();
@@ -70,7 +64,6 @@ export class AuthService {
     }
     return null;
   }
-
   /** Récupérer l’ID utilisateur */
   getUtilisateurId(): number | null {
     const token = this.getToken();
@@ -89,7 +82,6 @@ export class AuthService {
     }
     return null;
   }
-
   /** Récupère le prénom de l'utilisateur connecté */
   getPrenom(): string | null {
     const token = this.getToken();
@@ -99,7 +91,6 @@ export class AuthService {
     }
     return null;
   }
-
   /** Déconnexion */
   logout() {
     localStorage.removeItem('access_token');
@@ -107,7 +98,6 @@ export class AuthService {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }
-
   /** Vérifie si un utilisateur est connecté */
   isAuthenticated(): boolean {
     return !!this.getToken();

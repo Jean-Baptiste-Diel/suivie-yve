@@ -7,14 +7,13 @@ export interface IUtilisateur {
   email: string;
   motdepasse: string;
   role: string;
-  authentifie: boolean;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilisateurService {
-  private readonly apiUrl = 'http://127.0.0.1:8000/api/utilisateurs';
+  private readonly apiUrl = 'http://127.0.0.1:8000/utilisateurs';
   constructor(private readonly http: HttpClient) {
   }
   // Créer un utilisateur

@@ -1,22 +1,40 @@
-<!-- Barre de navigation -->
-<app-navigation [(activeSection)]="activeSection"></app-navigation>
-<h3>Liste des utilisateur</h3>
-<div class="user-row">
-  <p>TIBERA</p>
-  <p>Yverline</p>
-  <p>GENIE LOGICIEL</p>
-  <p>Etudiant</p>
-  <p>Licence</p>
-  <button (click)="DetailModal()">
-    voir
+  <button class="btn btn-list" [class.active]="activeSection === 'listeUtilisateur'"
+        (click)="setActiveSection('listeUtilisateur')">Liste utilisateur
   </button>
-</div>
-<!-- Modal -->
-<div class="modal"
-     [class.show]="ouvrirDetailUtilisateur"
-     (click)="onBackdropClick($event)">
-  <div class="modal-content" (click)="$event.stopPropagation()">
-    <span class="close" (click)="fermerDetailUtilisateur()">&times;</span>
-    <app-utilisateur-detail></app-utilisateur-detail>
+
+  <button type="submit" (click)="ajouterUtilisateurModal()" class="btn btn-list">
+    Ajouter un utilisateur
+  </button>
+  <!-- Modal -->
+  <div class="modal"
+       [class.show]="ouvrirAjouterUtilisateur"
+       (click)="onBackdropClick($event)">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <span class="close" (click)="fermerAjouterUtilisateur()">&times;</span>
+      <app-utilisateur-component></app-utilisateur-component>
+    </div>
   </div>
-</div>
+
+@if (activeSection === 'listeUtilisateur'){
+  <h3>Liste des utilisateur</h3>
+  @for (utilisateur of utilisateurs; track utilisateur.id){
+    <div class="user-row">
+      <p>{{ utilisateur.nom }}</p>
+      <p>{{ utilisateur.prenom }}</p>
+      <p>{{ utilisateur.role }}</p>
+      <button (click)="DetailModal(utilisateur.id)">
+        voir
+      </button>
+    </div>
+  }
+
+  <!-- Modal -->
+  <div class="modal"
+       [class.show]="isOpen"
+       (click)="onBackdropClick($event)">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <span class="close" (click)="fermerDetailUtilisateur()">&times;</span>
+      <app-utilisateur-detail [utilisateurId]="selectedUtilisateurId"></app-utilisateur-detail>
+    </div>
+  </div>
+}

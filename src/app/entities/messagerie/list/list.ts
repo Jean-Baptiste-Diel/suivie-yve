@@ -14,7 +14,7 @@ export class ListMessagerieComponent implements OnInit {
 
   @Output() conversationSelected = new EventEmitter<Conversation>();
 
-  constructor(private messagerieService: MessagerieService) {}
+  constructor(private readonly messagerieService: MessagerieService) {}
 
   ngOnInit(): void {
     this.loadConversations(); // ✅ Appel la méthode de chargement (au lieu de dupliquer le code)

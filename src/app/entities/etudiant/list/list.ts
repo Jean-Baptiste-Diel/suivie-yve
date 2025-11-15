@@ -3,7 +3,7 @@ import {NgForOf} from "@angular/common";
 import {Jury, JuryService} from '../../../services/jury-service';
 import {Etudiant, EtudiantService} from '../../../services/etudiant-service';
 import {IUtilisateur, UtilisateurService} from '../../../services/utilisateur-service';
-import {Utilisateur} from '../../utilisateur/utilisateur';
+import {UtilisateurComponent} from '../../utilisateur/utilisateur-component';
 interface ConnexionResponse {
     id: number;
     email: string;

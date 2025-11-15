@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input, numberAttribute} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @Component({
@@ -11,5 +11,5 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
   styleUrl: './utilisateur-detail.scss'
 })
 export class UtilisateurDetail {
-
+  @Input({transform: numberAttribute}) utilisateurId!: number;
 }

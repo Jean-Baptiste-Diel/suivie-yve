@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {SoutenanceService} from '../../../services/soutenance-service';
-import {Projet, ProjetService} from '../../../services/projet-service';
-import {IUtilisateur} from '../../../services/utilisateur-service';
+import {Projet, ProjetService} from '../service/projet-service';
+import {Encadrant, EncadrantService} from '../../encadrant/service/encadrant-service';
 
 @Component({
   selector: 'app-create-projet',
@@ -13,24 +12,32 @@ import {IUtilisateur} from '../../../services/utilisateur-service';
   templateUrl: './createProjet.html',
   styleUrl: './createProjet.scss'
 })
-export class CreateProjet {
+export class CreateProjet implements OnInit {
+  encadrants: Encadrant[] = [];
   projetForm: FormGroup;
-  constructor(private formBuilder: FormBuilder, private projetService: ProjetService) {
+  constructor(private readonly formBuilder: FormBuilder,
+              private readonly projetService: ProjetService,
+              private readonly encadrantService: EncadrantService) {
     this.projetForm = this.formBuilder.group({
       titre: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      niveau: ['', [Validators.required]],
+      encadrant: ['', [Validators.required]],
     })
   }
+
+  ngOnInit(): void {
+        this.listeEncadrant()
+        console.log(this.listeEncadrant())
+    }
   ajouterProjet(projetForm: FormGroup) {
     const projet: Projet = {
-  titre: this.projetForm.value.titre,
-  description: this.projetForm.value.description,
-  date_soumission: this.projetForm.value.date_soumission,
-  statut: this.projetForm.value.statut,
-  encadrant: this.projetForm.value.encadrant,
-  jury: this.projetForm.value.jury
-  // soutenance est optionnel
+    titre: this.projetForm.value.titre,
+    description: this.projetForm.value.description,
+    niveau: this.projetForm.value.niveau,
+    encadrant: this.projetForm.value.encadrant,
 };
-
+console.log(projet);
     this.projetService.create(projet).subscribe({
       next: (response) => {
         console.log('projet créé avec succès:', response);
@@ -40,6 +47,14 @@ export class CreateProjet {
       }
     });
   }
+
+  listeEncadrant(){
+    this.encadrantService.getAllEncadrant().subscribe({
+        next: (data) => this.encadrants = data,
+        error: (err) => console.error('Erreur lors du chargement', err)
+      });
+  }
+
   goBack() {
 
   }

@@ -11,19 +11,13 @@
     <textarea id="description" formControlName="description" rows="3" placeholder="Entrez une description détaillée"></textarea>
   </div>
 
-  <!-- Champ Date de soumission -->
+  <!-- Champ Niveau -->
   <div class="form-group">
-    <label for="date_soumission">Date de soumission <span class="required">*</span></label>
-    <input id="date_soumission" type="date" formControlName="date_soumission">
-  </div>
-
-  <!-- Champ Statut -->
-  <div class="form-group">
-    <label for="statut">Statut <span class="required">*</span></label>
-    <select id="statut" formControlName="statut">
-      <option value="">-- Sélectionnez un statut --</option>
-      <option value="en_cours">En cours</option>
-      <option value="termine">Terminé</option>
+    <label for="niveau">Niveau <span class="required">*</span></label>
+    <select id="niveau" formControlName="niveau">
+      <option value="">-- Sélectionnez un niveau --</option>
+      <option value="Licence">Licence</option>
+      <option value="Master">Master</option>
     </select>
   </div>
 
@@ -32,30 +26,13 @@
     <label for="encadrant">Encadrant <span class="required">*</span></label>
     <select id="encadrant" formControlName="encadrant">
       <option value="">-- Choisir un encadrant --</option>
+      @for (enc of encadrants; track enc.id){
+        <option [value]="enc.id">
+          {{ enc.nom }} - {{ enc.specialite }}
+        </option>
+      }
       <option *ngFor="let enc of encadreurs" [value]="enc.id">
         {{ enc.nom }} - {{ enc.specialite }}
-      </option>
-    </select>
-  </div>
-
-  <!-- Champ Jury -->
-  <div class="form-group">
-    <label for="jury">Jury <span class="required">*</span></label>
-    <select id="jury" formControlName="jury">
-      <option value="">-- Choisir un jury --</option>
-      <option *ngFor="let j of jurys" [value]="j.id">
-        {{ j.nom }}
-      </option>
-    </select>
-  </div>
-
-  <!-- Champ Soutenance (optionnel) -->
-  <div class="form-group">
-    <label for="soutenance">Soutenance</label>
-    <select id="soutenance" formControlName="soutenance">
-      <option value="">-- Choisir une soutenance --</option>
-      <option *ngFor="let s of soutenances" [value]="s.id">
-        {{ s.date }} - {{ s.lieu }}
       </option>
     </select>
   </div>

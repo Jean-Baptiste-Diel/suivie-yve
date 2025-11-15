@@ -21,7 +21,7 @@ export const routes: Routes = [
  { path: 'dashboard-admin', loadComponent: () => import('./dashboard/roles/admin-dashboard/admin-dashboard').then(m => m.AdminDashboardComponent) },
 
   // CRUD utilisateur
-  { path: 'utilisateur-connecter', loadComponent: () => import('./entities/utilisateur/utilisateur').then(m => m.Utilisateur) },
+  { path: 'utilisateur-connecter', loadComponent: () => import('./entities/utilisateur/utilisateur-component').then(m => m.UtilisateurComponent) },
   { path: 'utilisateurs', loadComponent: () => import('./entities/utilisateur/list-utilisateur/list-utilisateur').then(m => m.ListUtilisateur) },
   // CRUD Étudiants
   { path: 'etudiants', loadComponent: () => import('./entities/etudiant/list/list').then(m => m.List) },
@@ -54,8 +54,8 @@ export const routes: Routes = [
   { path: 'livrables/detail/:id', loadComponent: () => import('./entities/livrable/detail/detail').then(m => m.Detail) },
 
   // CRUD Soutenances
-  { path: 'soutenances', loadComponent: () => import('./entities/soutenance/list/list').then(m => m.List) },
-  { path: 'soutenances/create', loadComponent: () => import('./entities/soutenance/create/create').then(m => m.Create) },
+  { path: 'soutenances', loadComponent: () => import('./entities/soutenance/list/list-soutenance-component').then(m => m.ListSoutenanceComponent) },
+  { path: 'soutenances/create', loadComponent: () => import('./entities/soutenance/create/create-soutenance-component').then(m => m.CreateSoutenanceComponent) },
   { path: 'soutenances/edit/:id', loadComponent: () => import('./entities/soutenance/edit/edit').then(m => m.Edit) },
   { path: 'soutenances/detail/:id', loadComponent: () => import('./entities/soutenance/detail/detail').then(m => m.Detail) },
 

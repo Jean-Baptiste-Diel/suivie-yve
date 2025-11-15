@@ -1,38 +1,68 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Navigation} from '../../../navigation/navigation';
-import {Utilisateur} from '../utilisateur';
+import {UtilisateurComponent} from '../utilisateur-component';
 import {UtilisateurDetail} from '../utilisateur-detail/utilisateur-detail';
+import {IUtilisateur, UtilisateurService} from '../service/utilisateur-service';
+
 
 @Component({
   selector: 'app-list-utilisateur',
   imports: [
-    Navigation,
-    Utilisateur,
-    UtilisateurDetail
+    UtilisateurDetail,
+    UtilisateurComponent,
   ],
   templateUrl: './list-utilisateur.html',
   styleUrl: './list-utilisateur.scss'
 })
-export class ListUtilisateur {
-// ✅ Déclarer la propriété activeSection
-  activeSection: string = 'Utilisateur';
+export class ListUtilisateur implements OnInit {
+  constructor(private readonly utilisateurService: UtilisateurService) {
+  }
 
-  // exemple si tu veux changer la section
-  ouvrirDetailUtilisateur = false;
+  ngOnInit(): void {
+        this.loadUtilisateurs()
+    }
+  // Déclarer la propriété activeSection
+  activeSection: string = 'listeUtilisateur';
+  public utilisateurs: IUtilisateur[] = [];
+  isOpen = false;
   setActiveSection(section: string) {
     this.activeSection = section;
   }
   // Fermer la modal quand on clique sur le fond (backdrop)
+  ouvrirAjouterUtilisateur: any;
+  selectedUtilisateurId: number | null = null;
   onBackdropClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
     if (target.classList.contains('modal')) {
       this.fermerDetailUtilisateur();
+      this.fermerAjouterUtilisateur();
     }
   }
-  DetailModal() {
-    this.ouvrirDetailUtilisateur = true;
+  DetailModal(id: number) {
+    if (!id) return;
+    this.selectedUtilisateurId = id;
+    this.loadDetailUtilisateur(id);
+    this.isOpen = true;
+  }
+  loadDetailUtilisateur(id: number) {
+    console.log(id)
   }
   fermerDetailUtilisateur() {
-    this.ouvrirDetailUtilisateur = false
+    this.isOpen = false
+  }
+  ajouterUtilisateurModal() {
+    this.ouvrirAjouterUtilisateur = true;
+  }
+
+  fermerAjouterUtilisateur() {
+    this.ouvrirAjouterUtilisateur = false;
+  }
+
+  loadUtilisateurs() {
+    this.utilisateurService.liste().subscribe({
+      next: (data) => this.utilisateurs = data,
+      complete: () => {console.log(this.utilisateurs)},
+      error: (err) => console.error('Erreur lors du chargement', err)
+    });
   }
 }

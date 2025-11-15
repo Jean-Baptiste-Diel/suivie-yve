@@ -1,6 +1,6 @@
 import {Component, Input, numberAttribute} from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import {Livrable, LivrableService} from '../../../services/livrable-service';
+import {LivrableService} from '../../../services/livrable-service';
 
 
 
