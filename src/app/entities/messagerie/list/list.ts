@@ -3,7 +3,7 @@ import { MessagerieService, Conversation } from '../../../services/messagerie.se
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-list-messagerie',
+  selector: 'app-liste-projet-dispo-messagerie',
   standalone: true,
   templateUrl: './list.html',
   styleUrls: ['./list.scss'],

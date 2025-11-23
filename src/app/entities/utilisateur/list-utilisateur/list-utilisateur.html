@@ -1,5 +1,6 @@
+  <script src="list-utilisateur.ts"></script>
   <button class="btn btn-list" [class.active]="activeSection === 'listeUtilisateur'"
-        (click)="setActiveSection('listeUtilisateur')">Liste utilisateur
+          (click)="setActiveSection('listeUtilisateur')">Liste utilisateur
   </button>
 
   <button type="submit" (click)="ajouterUtilisateurModal()" class="btn btn-list">
@@ -22,7 +23,7 @@
       <p>{{ utilisateur.nom }}</p>
       <p>{{ utilisateur.prenom }}</p>
       <p>{{ utilisateur.role }}</p>
-      <button (click)="DetailModal(utilisateur.id)">
+      <button (click)="DetailModal(utilisateur.id!)">
         voir
       </button>
     </div>

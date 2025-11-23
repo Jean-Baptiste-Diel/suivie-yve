@@ -1,0 +1,59 @@
+<div class="list-container">
+  <div class="header">
+    <h1>Gestion des Livrables</h1>
+  </div>
+
+  <div class="content">
+    <div class="header-actions">
+      <h2>Liste des livrables</h2>
+      <button class="btn-add">
+        <span>+</span> Nouveau livrable
+      </button>
+    </div>
+
+    @if (livrables.length === 0) {
+      <div class="empty-state">
+        <div class="empty-icon">📁</div>
+        <h3>Aucun livrable trouvé</h3>
+        <p>Commencez  créer votre premier livrable</p>
+      </div>
+    }
+
+    @if (livrables.length > 0) {
+      <table class="data-table">
+        <thead>
+        <tr>
+          <th>Titre</th>
+          <th>Fichier</th>
+          <th>Date de soumission</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+
+        <tbody>
+          @for (livrable of livrables; track livrable.id) {
+            <tr>
+              <td>{{ livrable.titre }}</td>
+
+              <td>
+                <a [href]="livrable.fichier" target="_blank">
+                  Télécharger
+                </a>
+              </td>
+
+              <td>{{ livrable.date_soumission }}</td>
+
+              <td>
+                <div class="actions">
+                  <button (click)="deleteLivrable(livrable.id)" class="btn btn-delete">
+                    🗑️ Supprimer
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  </div>
+</div>

@@ -1,24 +1,35 @@
-<div class="details-container">
-  <div class="details-card">
-    <div class="card-header">
-      <h2>Fiche utilisateur</h2>
-    </div>
-    <div class="card-body">
-        <!-- Nom et prénom sur la même ligne -->
+@if (utilisateur){
+  <div class="details-container">
+    <div class="details-card">
+      <div class="card-header">
+        <h2>Fiche utilisateur</h2>
+      </div>
+
+      <div class="card-body">
+
         <div class="details-row">
           <div class="details-group">
-            <p></p>
+            <p><strong>Nom :</strong> {{ utilisateur.nom }}</p>
           </div>
           <div class="details-group">
-            <p>Prénom</p>
+            <p><strong>Prénom :</strong> {{ utilisateur.prenom }}</p>
           </div>
         </div>
+
         <div class="details-group">
-          <p>Email</p>
+          <p><strong>Email :</strong> {{ utilisateur.email }}</p>
         </div>
+
+        <div class="details-group">
+          <p><strong>Rôle :</strong> {{ utilisateur.role }}</p>
+        </div>
+
         <div class="details-actions">
           <button type="submit" class="btn btn-msg">Envoyer message</button>
         </div>
+
+      </div>
     </div>
   </div>
-</div>
+}
+

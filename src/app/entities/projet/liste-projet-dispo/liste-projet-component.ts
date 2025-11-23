@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { Projet, ProjetService } from '../../../services/projet-service';
 import { AuthService } from '../../../core/auth.service';
 import { EtudiantService } from '../../../services/etudiant-service';
-import { LivrableService } from '../../../services/livrable-service';
-import { Livrable } from '../../../services/livrable-service';
 import { Create } from '../../livrable/create/create';
+import {Projet, ProjetService} from '../service/projet-service';
+import {Livrable, LivrableService} from '../../../services/livrable-service';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.html',
+  selector: 'app-liste-projet-dispo',
+  templateUrl: './liste-projet-component.html',
   imports: [Create],
-  styleUrls: ['./list.scss']
+  styleUrls: ['./liste-projet-component.scss']
 })
-export class List implements OnInit {
+export class ListeProjetComponent implements OnInit {
   projets: Projet[] = [];
   monProjet: Projet | null = null;
 
@@ -28,27 +27,33 @@ export class List implements OnInit {
     private readonly projetService: ProjetService,
     private readonly authService: AuthService,
     private readonly etudiantService: EtudiantService,
-    private readonly livrableService: LivrableService
+    private readonly livrableService: LivrableService,
   ) {}
 
   ngOnInit(): void {
     this.loadProjetsNonAttribues();
-    this.loadLivrables(1)
+    //this.loadLivrables(this.projetId)
   }
 
   // Charger tous les projets non attribués ou projet de l'utilisateur
   loadProjetsNonAttribues() {
     const currentUser = this.authService.getUtilisateurId();
-    if (!currentUser || !currentUser) return;
+    if (!currentUser) return;
 
     this.projetService.getProjetDispo(currentUser).subscribe({
       next: (data) => {
         if (data.length === 1 && data[0].etudiant === currentUser) {
+
           // L'étudiant a déjà un projet
           this.monProjet = data[0];
           this.projets = [data[0]];
+
+          if (this.monProjet?.id) {
+            localStorage.setItem('projetId', String(this.monProjet.id));
+            console.log("🔥 Projet ID enregistré :", this.monProjet.id);
+          }
         } else {
-          // Pas encore de projet
+
           this.monProjet = null;
           this.projets = data;
         }
@@ -62,16 +67,16 @@ export class List implements OnInit {
   lier(projet: Projet) {
     const currentUser = this.authService.getUtilisateurId();
     if (!projet.id) return;
-
     const data = {
       etudiant_id: currentUser,
       projet_id: projet.id
     };
-
     this.etudiantService.attribuerProjet(data).subscribe({
       next: () => {
         this.monProjet = projet;
         this.projets = [projet];
+        localStorage.setItem('projetId', String(projet.id));
+        console.log("🔥 Projet ID enregistré (lier) :", projet.id);
       },
       error: (err) => alert('Erreur lors de l\'attribution : ' + err.error?.error)
     });
@@ -94,7 +99,6 @@ export class List implements OnInit {
   ouvrirFormLivrable(projetId: number | undefined) {
     if (!projetId) return;
     this.selectedProjetId = projetId;
-    this.loadLivrables(projetId);
     this.isFormLivrableModalOpen = true;
   }
 
@@ -103,15 +107,13 @@ export class List implements OnInit {
     this.selectedProjetId = null;
     this.livrables = [];
   }
-
-  // Charger les livrables d'un projet
   loadLivrables(projetId: number) {
     this.livrableService.getAll(projetId).subscribe({
       next: (data) => {
         this.livrables = data;
-        console.log('Livrables récupérés :', data);
+        console.log('Livrables récupéré :', data);
       },
-      error: (err) => console.error('Erreur chargement livrables', err)
+      error: (err) => console.error('Erreur lors du chargement des livrables', err)
     });
   }
 }

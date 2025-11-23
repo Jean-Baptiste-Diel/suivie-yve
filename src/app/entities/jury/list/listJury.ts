@@ -4,7 +4,7 @@ import {Jury, JuryService} from '../../../services/jury-service';
 import {RouterLink} from '@angular/router';
 
 @Component({
-  selector: 'app-list-jury',
+  selector: 'app-liste-projet-dispo-jury',
   imports: [
     NgForOf,
     NgIf,

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { AuthService } from '../core/auth.service';
+import { AuthService } from '../../core/auth.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -15,21 +15,21 @@ interface ConnexionResponse {
 }
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.html',
+  selector: 'app-auth-component',
+  templateUrl: './auth-component.html',
   imports: [
     ReactiveFormsModule
   ],
-  styleUrls: ['./dashboard.scss']
+  styleUrls: ['./auth-component.scss']
 })
-export class Dashboard implements OnInit {
+export class AuthComponent implements OnInit {
   role: string | null = null;  // ✅ peut être null si pas connecté
   id: number = 0;
   connexionForm: FormGroup;
   private message: string = 'Erreur lors de connexion';
   identifiant: any;
   motDePasse: any;
-  private erreur!: string;
+  private readonly erreur!: string;
 
   constructor(
     private readonly formBuilder: FormBuilder,

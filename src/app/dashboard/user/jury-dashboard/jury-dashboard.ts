@@ -1,14 +1,10 @@
-// jury-dashboard.ts
+// jury-auth-component.ts
 import {Component, OnInit} from '@angular/core';
-import {NgForOf, NgIf} from '@angular/common';
 import {ListCommentaire} from '../../../entities/commentaire/list/listCommentaire';
-
 @Component({
   selector: 'app-jury-dashboard',
   templateUrl: './jury-dashboard.html',
   imports: [
-    NgForOf,
-    NgIf,
     ListCommentaire
   ],
   styleUrls: ['./jury-dashboard.scss']
@@ -17,7 +13,7 @@ export class JuryDashboardComponent implements OnInit {
   constructor() {
   }
   ngOnInit(): void {
-
+    console.log("ok")
   }
   activeSection: 'evaluation' | 'remarques' | 'calendrier' = 'evaluation';
 

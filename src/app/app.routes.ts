@@ -8,17 +8,13 @@ import {ListUtilisateur} from './entities/utilisateur/list-utilisateur/list-util
 
 export const routes: Routes = [
 
-
-
-
-
-  // Dashboard
+  // AuthComponent
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
- { path: 'dashboard', loadComponent: () => import('./dashboard/dashboard').then(m => m.Dashboard) },
- { path: 'dashboard-student', loadComponent: () => import('./dashboard/roles/student-dashboard/student-dashboard').then(m => m.StudentDashboardComponent) },
- { path: 'dashboard-jury', loadComponent: () => import('./dashboard/roles/jury-dashboard/jury-dashboard').then(m => m.JuryDashboardComponent) },
- { path: 'dashboard-supervisor', loadComponent: () => import('./dashboard/roles/supervisor-dashboard/supervisor-dashboard').then(m => m.SupervisorDashboardComponent) },
- { path: 'dashboard-admin', loadComponent: () => import('./dashboard/roles/admin-dashboard/admin-dashboard').then(m => m.AdminDashboardComponent) },
+ { path: 'dashboard', loadComponent: () => import('./dashboard/auth/auth-component').then(m => m.AuthComponent) },
+ { path: 'dashboard-student', loadComponent: () => import('./dashboard/user/student-dashboard/student-dashboard').then(m => m.StudentDashboardComponent) },
+ { path: 'dashboard-jury', loadComponent: () => import('./dashboard/user/jury-dashboard/jury-dashboard').then(m => m.JuryDashboardComponent) },
+ { path: 'dashboard-supervisor', loadComponent: () => import('./dashboard/user/supervisor-dashboard/supervisor-dashboard').then(m => m.SupervisorDashboardComponent) },
+ { path: 'dashboard-admin', loadComponent: () => import('./dashboard/user/admin-dashboard/admin-dashboard').then(m => m.AdminDashboardComponent) },
 
   // CRUD utilisateur
   { path: 'utilisateur-connecter', loadComponent: () => import('./entities/utilisateur/utilisateur-component').then(m => m.UtilisateurComponent) },
@@ -42,13 +38,13 @@ export const routes: Routes = [
   { path: 'administrateurs/detail/:id', loadComponent: () => import('./entities/administrateur/detail/detail').then(m => m.Detail) },
 
   // CRUD Projets
-  { path: 'projets', loadComponent: () => import('./entities/projet/list/list').then(m => m.List) },
+  { path: 'projets', loadComponent: () => import('./entities/projet/liste-projet-dispo/liste-projet-component').then(m => m.ListeProjetComponent) },
   { path: 'projets/create', loadComponent: () => import('./entities/projet/create/createProjet').then(m => m.CreateProjet) },
   { path: 'projets/edit/:id', loadComponent: () => import('./entities/projet/edit/edit').then(m => m.Edit) },
   { path: 'projets/detail/:id', loadComponent: () => import('./entities/projet/detail/detail').then(m => m.Detail) },
 
   // CRUD Livrables
-  { path: 'livrables', loadComponent: () => import('./entities/livrable/list/list').then(m => m.List) },
+  { path: 'livrables', loadComponent: () => import('./entities/livrable/list/liste-livrable-component').then(m => m.ListeLivrableComponent) },
   { path: 'livrables/create', loadComponent: () => import('./entities/livrable/create/create').then(m => m.Create) },
   { path: 'livrables/edit/:id', loadComponent: () => import('./entities/livrable/edit/edit').then(m => m.Edit) },
   { path: 'livrables/detail/:id', loadComponent: () => import('./entities/livrable/detail/detail').then(m => m.Detail) },
@@ -71,7 +67,7 @@ export const routes: Routes = [
   { path: 'messageries/edit/:id', loadComponent: () => import('./entities/messagerie/edit/edit').then(m => m.Edit) },
 
 
-  { path: 'messageries/list', component: ListMessagerieComponent },
+  { path: 'messageries/liste-projet-dispo', component: ListMessagerieComponent },
   { path: 'messageries/detail/:id', component: DetailMessagerieComponent },
 ];
 [

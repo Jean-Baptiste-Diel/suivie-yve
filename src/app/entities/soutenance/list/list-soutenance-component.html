@@ -1,15 +1,13 @@
-<button class="btn btn-list" [class.active]="activeSection === 'listeSoutenance'"
-        (click)="setActiveSection('listeSoutenance')">Soutenance prevue</button>
+<div class="toolbar">
+  <button class="btn btn-list" [class.active]="activeSection === 'listeSoutenance'"
+          (click)="setActiveSection('listeSoutenance')">Soutenance prevue</button>
 
-<button class="btn btn-list" [class.active]="activeSection === 'planifier'"
-        (click)="setActiveSection('planifier')">Planifier soutenance</button>
+  <button class="btn btn-list" [class.active]="activeSection === 'planifier'"
+          (click)="setActiveSection('planifier')">Planifier soutenance</button>
 
-<button class="btn btn-list"
-        (click)="telechagerPDF('planifier')">Telecharger le PDF</button>
-@if (activeSection === 'listeProjet'){
-  <h3>Liste projet valide</h3>
-  <app-projet-valider-component></app-projet-valider-component>
-}
+  <button class="btn btn-list"
+          (click)="telechagerPDF()">Telecharger le PDF</button>
+</div>
 
 @if (activeSection === 'listeSoutenance'){
   <h1>Planning soutenance</h1>
@@ -19,25 +17,7 @@
       <h3>Aucun projet trouvé</h3>
     </div>
   }
-  @for (soutenance of soutenances; track soutenance.id){
-    <div class="user-row">
-      <p> Date prevue {{ soutenance.date }}</p>
-      <p> Salle {{ soutenance.salle }}</p>
-      <p> Projets {{ soutenance.date }}</p>
-      <button (click)="DetailModal()">
-        voir
-      </button>
-    </div>
-    <!-- Modal -->
-    <div class="modal"
-         [class.show]="ouvrirDetailSoutenance"
-         (click)="onBackdropClick($event)">
-      <div class="modal-content" (click)="$event.stopPropagation()">
-        <span class="close" (click)="fermerDetailUtilisateur()">&times;</span>
-        <app-utilisateur-detail></app-utilisateur-detail>
-      </div>
-    </div>
-  }
+  <full-calendar [options]="calendarOptions"></full-calendar>
 }
 
 @if (activeSection === 'planifier'){

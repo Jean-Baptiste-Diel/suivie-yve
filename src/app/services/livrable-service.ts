@@ -7,26 +7,25 @@ export interface Livrable {
   titre: string;
   fichier: File;
   projet_id?: number;
+  date_soumission?: any;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class LivrableService {
-  private apiUrl = 'http://127.0.0.1:8000/api/livrables';
+  private readonly apiUrl = 'http://127.0.0.1:8000/livrables';
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   // Créer un livrable
   create(formData : FormData): Observable<Livrable> {
     return this.http.post<Livrable>(`${this.apiUrl}/ajouter-livrable/`, formData);
   }
-
   // Récupérer tous les livrables d'un projet
   getAll(id: number): Observable<Livrable[]> {
     return this.http.get<Livrable[]>(`${this.apiUrl}/liste-livrables/?projet_id=${id}`);
   }
-
   // Récupérer un livrable
   getById(id: number): Observable<Livrable> {
     return this.http.get<Livrable>(`${this.apiUrl}/${id}/`);

@@ -15,8 +15,8 @@ export class Create {
   livrableForm: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private livrableService: LivrableService
+    private readonly formBuilder: FormBuilder,
+    private readonly livrableService: LivrableService
   ) {
     this.livrableForm = this.formBuilder.group({
       titre: ['', Validators.required],
@@ -39,12 +39,13 @@ export class Create {
     }
     const formData = new FormData();
     formData.append("titre", form.value.titre);
-    formData.append("fichier", this.selectedFile); // ← c'est le fichier réel
-    formData.append("projet_id", this.projetId.toString());
+    formData.append("fichier", this.selectedFile);
+    formData.append("projetId", this.projetId.toString());
     if (!this.selectedFile) {
       alert('Veuillez sélectionner un fichier.');
       return;
     }
+    console.log("FORMDATA :", [...formData.entries()]);
 
     this.livrableService.create(formData).subscribe({
       next: (response) => {

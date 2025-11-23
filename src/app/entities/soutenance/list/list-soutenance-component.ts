@@ -1,65 +1,77 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder} from '@angular/forms';
-import {RouterLink} from '@angular/router';
-import {Soutenance, SoutenanceService} from '../service/soutenance-service';
-import {UtilisateurDetail} from '../../utilisateur/utilisateur-detail/utilisateur-detail';
-import {CreateSoutenanceComponent} from '../create/create-soutenance-component';
-import {ProjetValiderComponent} from '../../projet/projet-valider-component/projet-valider-component';
+import { Component, OnInit } from '@angular/core';
+import { Soutenance, SoutenanceService } from '../service/soutenance-service';
+import { CreateSoutenanceComponent } from '../create/create-soutenance-component';
+
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { CalendarOptions } from '@fullcalendar/core';
 
 @Component({
   selector: 'app-list-soutenance',
+  standalone: true,
   imports: [
-    UtilisateurDetail,
     CreateSoutenanceComponent,
-    ProjetValiderComponent
+    FullCalendarModule,
   ],
   templateUrl: './list-soutenance-component.html',
-  styleUrl: './list-soutenance-component.scss'
+  styleUrls: ['./list-soutenance-component.scss']
 })
 export class ListSoutenanceComponent implements OnInit {
+
   public soutenances: Soutenance[] = [];
-  ouvrirDetailSoutenance = false;
   activeSection: string = 'listeSoutenance';
-  constructor(public formBuilder: FormBuilder, private readonly soutenanceService: SoutenanceService) {}
+  calendarOptions!: CalendarOptions;
+
+  constructor( private readonly soutenanceService: SoutenanceService) {}
+
   ngOnInit() {
-    this.loadSoutenances()
+    this.loadSoutenances();
   }
 
-  setActiveSection(section: 'listeSoutenance' | 'listeProjetFini' | 'planifier') {
+  setActiveSection(section: 'listeSoutenance' | 'planifier') {
     this.activeSection = section;
   }
 
   loadSoutenances() {
     this.soutenanceService.liste().subscribe({
-      next: (data) => this.soutenances = data,
+      next: (data) => {
+        this.soutenances = data;
+
+        // Transformer la liste en événements FullCalendar
+        this.calendarOptions = {
+          plugins: [dayGridPlugin, interactionPlugin],
+          initialView: 'dayGridMonth',
+          initialDate: new Date(),
+          selectable: true,
+
+          // Griser visuellement les jours passés
+          dayCellDidMount: (info) => {
+            const today = new Date();
+            today.setHours(0,0,0,0);
+            if (info.date < today) {
+              info.el.classList.add('fc-day-disabled');
+            }
+          },
+
+          // événements
+          events: this.soutenances.map(s => ({
+            //title: 'Salle ' + s.salle,
+            date: new Date(s.date).toISOString().substring(0, 10)
+          }))
+        };
+      },
       error: (err) => console.error('Erreur lors du chargement', err)
     });
   }
-
-  deleteSoutenance(id: number | null) {
-
-  }
-
-  DetailModal() {
-
-  }
-
-  fermerDetailUtilisateur() {
-
-  }
-
-  onBackdropClick($event: PointerEvent) {
-
-  }
-
-  telechagerPDF(planifier: string) {
-      this.soutenanceService.exportPdf().subscribe(blob => {
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'planning_soutenances.pdf';
-        a.click();
-        window.URL.revokeObjectURL(url);
-      });
+  telechagerPDF() {
+    this.soutenanceService.exportPdf().subscribe(blob => {
+      const url = globalThis.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'planning_soutenances.pdf';
+      a.click();
+      globalThis.URL.revokeObjectURL(url);
+    });
   }
 }

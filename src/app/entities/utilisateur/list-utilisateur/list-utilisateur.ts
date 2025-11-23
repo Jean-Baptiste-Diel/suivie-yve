@@ -1,13 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {Navigation} from '../../../navigation/navigation';
+import {Navigation} from '../../../dashboard/user/supervisor-dashboard/navigation/navigation';
 import {UtilisateurComponent} from '../utilisateur-component';
 import {UtilisateurDetail} from '../utilisateur-detail/utilisateur-detail';
 import {IUtilisateur, UtilisateurService} from '../service/utilisateur-service';
+import {CommonModule} from '@angular/common';
 
 
 @Component({
   selector: 'app-list-utilisateur',
   imports: [
+    CommonModule,
     UtilisateurDetail,
     UtilisateurComponent,
   ],
@@ -39,9 +41,7 @@ export class ListUtilisateur implements OnInit {
     }
   }
   DetailModal(id: number) {
-    if (!id) return;
     this.selectedUtilisateurId = id;
-    this.loadDetailUtilisateur(id);
     this.isOpen = true;
   }
   loadDetailUtilisateur(id: number) {

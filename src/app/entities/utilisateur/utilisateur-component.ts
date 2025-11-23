@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {UtilisateurService} from '../../services/utilisateur-service';
+import {IUtilisateur, UtilisateurService} from './service/utilisateur-service';
 
 @Component({
   selector: 'app-utilisateur-component',
@@ -27,17 +27,12 @@ export class UtilisateurComponent {
   }
 
   ajouterUtilisateur(utilisateurForm: FormGroup) {
-    const utilisateur : { nom: string; prenom: string; email: string; motdepasse: string; role: string } = {
-      nom: utilisateurForm.value.nom,
-      prenom: utilisateurForm.value.prenom,
-      email: utilisateurForm.value.email,
-      motdepasse: "passer",
-      role: utilisateurForm.value.role,
-    }
+    const utilisateur: IUtilisateur = this.utilisateurForm.value;
     console.log(utilisateur);
     this.utilisateurService.create(utilisateur).subscribe({
       next: (response) => {
         console.log('Utilisateur créé avec succès:', response);
+        this.utilisateurForm.reset();
       },
       error: (error) => {
         console.error('Erreur lors de la création:', error);
@@ -45,6 +40,5 @@ export class UtilisateurComponent {
     });
   }
   goBack() {
-
   }
 }
