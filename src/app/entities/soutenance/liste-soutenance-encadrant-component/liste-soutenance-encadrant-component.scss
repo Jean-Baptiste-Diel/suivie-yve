@@ -1,0 +1,48 @@
+/* Conteneur global */
+.calendar-container {
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Forcer FullCalendar à afficher les titres sur plusieurs lignes */
+.fc-event-title {
+  white-space: pre-line !important; /* ⚡ obligatoire */
+}
+
+/* Design des événements */
+.fc-daygrid-event {
+  background-color: #1976d2 !important;   /* bleu */
+  border: none !important;
+  color: white !important;
+  padding: 3px 5px;
+  border-radius: 5px;
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+/* Hover */
+.fc-daygrid-event:hover {
+  background-color: #125a9c !important;
+  cursor: pointer;
+}
+
+/* Style du header calendrier */
+.fc-toolbar-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+}
+
+.fc-button {
+  background: #1976d2 !important;
+  border: none !important;
+  border-radius: 5px !important;
+}
+
+.fc-button:hover {
+  background: #125a9c !important;
+}

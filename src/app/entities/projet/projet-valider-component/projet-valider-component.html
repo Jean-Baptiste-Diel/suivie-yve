@@ -1,0 +1,26 @@
+<button class="btn btn-list" (click)="PlanifierModal()">
+  Planifier Soutenance
+</button>
+@if (projets.length === 0){
+  <div class="empty-state">
+    <div class="empty-icon">📁</div>
+    <h3>Aucun projet trouvé</h3>
+  </div>
+}
+@for (projet of projets; track projet.id){
+  <div class="user-row">
+    <p> Titre: {{ projet.titre }}</p>
+    <button (click)="DetailProjetModal(projet.id!)">
+      voir
+    </button>
+  </div>
+  <!-- Modal detail projet-->
+  <div class="modal"
+       [class.show]="ouvrirDetailProjet"
+       (click)="onBackdropClick($event)">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <span class="close" (click)="fermerDetailProjet()">&times;</span>
+      <app-detail-projet-component [projetId]="selectedProjetId"></app-detail-projet-component>
+    </div>
+  </div>
+}

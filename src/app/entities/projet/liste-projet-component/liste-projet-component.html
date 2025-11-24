@@ -1,0 +1,50 @@
+<button class="btn btn-list" [class.active]="activeSection === 'listeProjet'"
+        (click)="setActiveSection('listeProjet')">Projets</button>
+
+<button class="btn btn-list" [class.active]="activeSection === 'listeProjetFini'"
+        (click)="setActiveSection('listeProjetFini')">Projets fini</button>
+
+<button class="btn btn-list" [class.active]="activeSection === 'ajouterProjet'"
+        (click)="setActiveSection('ajouterProjet')">Ajouter projet</button>
+
+@if (activeSection === 'listeProjet'){
+@if (projets.length === 0){
+  <div class="empty-state">
+    <div class="empty-icon">📁</div>
+    <h3>Aucun projet trouvé</h3>
+  </div>
+}
+@for (projet of projets; track projet.id){
+  <div class="user-row">
+    <p> Titre: {{ projet.titre }}</p>
+    <button (click)="DetailModal(projet.id!)">
+      voir
+    </button>
+  </div>
+  <!-- Modal -->
+  <div class="modal"
+       [class.show]="ouvrirDetailProjet"
+       (click)="onBackdropClick($event)">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <span class="close" (click)="fermerDetailProjet()">&times;</span>
+      <app-detail-projet-component [projetId]="selectedProjetId"></app-detail-projet-component>
+    </div>
+  </div>
+}
+}
+
+@if(activeSection === 'listeProjetFini'){
+  <app-projet-valider-component></app-projet-valider-component>
+}
+<div class="modal"
+     [class.show]="ouvrirDetailProjet"
+     (click)="onBackdropClick($event)">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <span class="close" (click)="fermerPlanifierSoutenance()">&times;</span>
+  </div>
+  <app-create-soutenance></app-create-soutenance>
+</div>
+
+@if (activeSection === 'ajouterProjet'){
+  <app-create-projet></app-create-projet>
+}

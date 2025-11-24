@@ -1,0 +1,45 @@
+<!-- liste-projets-encadrant.component.html -->
+
+<div class="projets-container">
+  @if (projets?.length === 0){
+    <div>
+      Aucun projet encadré pour le moment.
+    </div>
+  }
+  @for (projet of projets; track projet.id){
+    <div class="projet-card">
+      <h3>{{ projet.titre }}</h3>
+      <p><strong>Description :</strong> {{ projet.description }}</p>
+      <p><strong>Niveau :</strong> {{ projet.niveau }}</p>
+      <p><strong>Statut :</strong> {{ projet.statut }}</p>
+      @if (projet.etudiants?.length > 0){
+        <div>
+          <p><strong>Étudiants :</strong></p>
+          <ul>
+            @for (etudiant of projet.etudiants; track etudiant.id){
+              <li>
+                {{ etudiant.prenom }} {{ etudiant.nom }} ({{ etudiant.email }})
+              </li>
+            }
+          </ul>
+        </div>
+      }
+      @if (!projet.etudiants || projet.etudiants.length === 0){
+        <div>
+          Aucun étudiant associé pour ce projet.
+        </div>
+      }
+      @if (projet.statut === 'termine') {
+        <button (click)="DetailProjetModal(projet.id)">Consulter</button>
+      } @else {
+        <button (click)="DetailProjetModal(projet.id)">Details</button>
+      }
+    </div>
+  }
+</div>
+<div class="modal" [class.show]="ouvrirDetailProjet" (click)="onBackdropClick($event)">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <span class="close" (click)="fermerDetailProjet()">&times;</span>
+    <app-detail-projet-component [projetId]="selectedProjetId"></app-detail-projet-component>
+  </div>
+</div>
