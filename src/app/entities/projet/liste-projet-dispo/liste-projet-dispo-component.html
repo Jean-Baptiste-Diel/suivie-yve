@@ -4,13 +4,13 @@
   } @else {
     <h2>Mon projet</h2>
   }
-
   @for (projet of projets; track projet.id) {
     <div class="projet-row">
-      <p><strong>Titre:</strong> {{ projet?.id }}</p>
-      <p><strong>Encadreur:</strong> {{ projet?.encadrant }}</p>
+      <p><strong>Titre:</strong> {{ projet?.titre }}</p>
+      <p><strong>Niveau:</strong> {{ projet?.niveau }}</p>
+      <p><strong>Encadreur:</strong> {{ projet.encadrant!.nom }}</p>
       <div class="actions">
-        <button (click)="ouvrirDetailModal(projet.id)">Détails</button>
+        <button (click)="DetailProjetModal(projet.id!)">Détails</button>
 
         @if (!monProjet) {
           <button (click)="lier(projet)">S'attribuer</button>
@@ -30,20 +30,14 @@
     <app-create-livrable [projetId]="selectedProjetId"></app-create-livrable>
 </div>
 
-<!-- MODAL DETAIL -->
-<div class="modal" [class.show]="isDetailModalOpen">
-  <div class="modal-content">
-    <span class="close" (click)="closeDetailModal()">&times;</span>
-    <h2>Détails du projet</h2>
-
-    @if (selectedProjet) {
-      <div>
-        <p><strong>Titre:</strong> {{ selectedProjet.titre }}</p>
-        <p><strong>Description:</strong> {{ selectedProjet.description }}</p>
-        <p><strong>Encadrant:</strong> {{ selectedProjet.encadrant }}</p>
-      </div>
-    } @else {
-      <p>Chargement...</p>
-    }
+<!-- MODAL DETAIL PROJETS -->
+<div class="modal" [class.show]="ouvrirDetailProjet" (click)="onBackdropClick($event)">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <span class="close" (click)="fermerDetailProjet()">&times;</span>
+    <app-detail-projet-component [projetId]="selectedProjetId"></app-detail-projet-component>
   </div>
 </div>
+@if (selectedProjetId){
+  <app-liste-livrable [projetId]="selectedProjetId"></app-liste-livrable>
+}
+

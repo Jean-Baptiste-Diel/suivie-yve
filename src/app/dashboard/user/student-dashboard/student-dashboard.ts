@@ -6,7 +6,7 @@ import { Detail } from '../../../entities/soutenance/detail/detail';
 import { ListCommentaire } from '../../../entities/commentaire/list/listCommentaire';
 import { Notifications } from '../../../entities/notifications/notifications';
 import { ListMessagerieComponent } from '../../../entities/messagerie/list/list';
-import{ListeProjetComponent}from '../../../entities/projet/liste-projet-dispo/liste-projet-component';
+import{ListeProjetDispoComponent}from '../../../entities/projet/liste-projet-dispo/liste-projet-dispo-component';
 import {Navigation} from './navigation/navigation';
 import {ListeLivrableComponent} from '../../../entities/livrable/list/liste-livrable-component';
 @Component({
@@ -21,7 +21,7 @@ import {ListeLivrableComponent} from '../../../entities/livrable/list/liste-livr
     ListCommentaire,
     Notifications,
     ListMessagerieComponent,
-    ListeProjetComponent,
+    ListeProjetDispoComponent,
     Navigation,
     Navigation,
     ListeLivrableComponent

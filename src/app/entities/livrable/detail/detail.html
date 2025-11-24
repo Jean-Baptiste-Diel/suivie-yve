@@ -1,62 +1,40 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Détails du Livrable</title>
-</head>
-<body>
 <div class="details-container">
   <div class="details-card">
     <div class="card-header">
       <h2>Détails du Livrable</h2>
-      <div class="badge">ID: {{ livrable?.id }}</div>
+      <div class="badge">ID: {{ livrable?.option }}</div>
     </div>
-
     <div class="card-body">
-      <div *ngIf="!livrable" class="loading-details">
-        <div class="spinner"></div>
-        <p>Chargement des détails...</p>
-      </div>
-
-      <div *ngIf="livrable" class="info-grid">
-        <div class="info-item">
-          <span class="info-label">Titre:</span>
-          <span class="info-value">{{ livrable.titre }}</span>
+      @if (!livrable){
+        <div class="loading-details">
+          <div class="spinner"></div>
+          <p>Chargement des détails...</p>
         </div>
+      } @else {
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">Titre:</span>
+            <span class="info-value">{{ livrable?.titre }}</span>
+          </div>
 
-        <div class="info-item">
-          <span class="info-label">Fichier:</span>
-          <span class="info-value" [class.empty]="!livrable.fichier">
-                            {{ livrable.fichier || 'Aucun fichier' }}
+          <div class="info-item">
+            <span class="info-label">Fichier:</span>
+            <span class="info-value" [class.empty]="livrable?.fichier">
+                            {{ livrable?.fichier || 'Aucun fichier' }}
                         </span>
+          </div>
         </div>
-
-        <div class="info-item">
-          <span class="info-label">Date de création:</span>
-          <!--<span class="info-value">
-                            {{ livrable.dateCreation | date:'dd/MM/yyyy à HH:mm' }}
-                        </span>-->
+      }
+      @if (livrable){
+        <div class="details-actions">
+          <a [routerLink]="['/edit', livrable?.id]" class="btn btn-edit">
+            ✏️ Modifier
+          </a>
+          <a routerLink="/list" class="btn btn-back">
+            ↩️ Retour à la liste
+          </a>
         </div>
-
-        <div class="info-item">
-          <span class="info-label">Dernière modification:</span>
-          <!--<span class="info-value">
-                            {{ livrable.dateModification | date:'dd/MM/yyyy à HH:mm' }}
-                        </span>-->
-        </div>
-      </div>
-
-      <div *ngIf="livrable" class="details-actions">
-        <a [routerLink]="['/edit', livrable.id]" class="btn btn-edit">
-          ✏️ Modifier
-        </a>
-        <a routerLink="/list" class="btn btn-back">
-          ↩️ Retour à la liste
-        </a>
-      </div>
+      }
     </div>
   </div>
 </div>
-</body>
-</html>

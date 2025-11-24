@@ -1,0 +1,74 @@
+<div class="details-container">
+  <div class="details-card">
+    <div class="card-header">
+      <h2>Détails du projet</h2>
+      <div class="badge"> {{ projet?.titre }}</div>
+    </div>
+
+    <div class="card-body">
+      @if(!projet){
+        <div class="loading-details">
+          <div class="spinner"></div>
+          <p>Chargement des détails...</p>
+        </div>
+      }
+      @else{
+        <div class="info-grid">
+
+          <div class="info-item">
+            <span class="info-label">Description :</span>
+            <span class="info-value">{{ projet.description }}</span>
+          </div>
+
+          <div class="info-item">
+            <span class="info-label">Niveau :</span>
+            <span class="info-value">{{ projet.niveau }}</span>
+          </div>
+
+          <div class="info-item">
+            <span class="info-label">Statut :</span>
+            <span class="info-value">{{ projet.etudiant?.nom }}</span>
+          </div>
+
+          <div class="info-item">
+            <span class="info-label">Date soumission :</span>
+            <span class="info-value">{{ projet.date_soumission }}</span>
+          </div>
+
+          <!-- 🎓 INFOS ENCANDRANT -->
+          <div class="info-item">
+            <span class="info-label">Encadrant :</span>
+            <span class="info-value">
+        {{ projet.encadrant?.nom }} {{ projet.encadrant?.prenom }}
+      </span>
+          </div>
+
+          <div class="info-item">
+            <span class="info-label">Spécialité :</span>
+            <span class="info-value">{{ projet.encadrant?.specialite }}</span>
+          </div>
+
+          <div class="info-item">
+            <span class="info-label">Email encadrant :</span>
+            <span class="info-value">{{ projet.encadrant?.email }}</span>
+          </div>
+
+        </div>
+      }
+
+      @if (projet){
+        <div class="details-actions">
+          <a [routerLink]="['/edit', projet.id]" class="btn btn-edit">
+            ✏️ Modifier
+          </a>
+          <a routerLink="/list" class="btn btn-back">
+            ↩️ Retour à la liste
+          </a>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+@if (selectedProjetId){
+  <app-liste-livrable [projetId]="selectedProjetId"></app-liste-livrable>
+}

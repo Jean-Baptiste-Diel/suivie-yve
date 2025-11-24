@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Livrable, LivrableService } from '../../../services/livrable-service';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import {Livrable, LivrableService} from '../service/livrable-service';
 
 @Component({
   selector: 'app-edit-livrable',
@@ -20,9 +20,9 @@ export class Edit implements OnInit {
   public selectedId: number | null = null;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private livrableService: LivrableService,
-    private route: ActivatedRoute
+    private readonly formBuilder: FormBuilder,
+    private readonly livrableService: LivrableService,
+    private readonly route: ActivatedRoute
   ) {
     // Initialisation du formulaire
     this.livrableForm = this.formBuilder.group({

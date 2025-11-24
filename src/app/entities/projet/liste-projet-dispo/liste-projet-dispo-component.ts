@@ -3,15 +3,18 @@ import { AuthService } from '../../../core/auth.service';
 import { EtudiantService } from '../../../services/etudiant-service';
 import { Create } from '../../livrable/create/create';
 import {Projet, ProjetService} from '../service/projet-service';
-import {Livrable, LivrableService} from '../../../services/livrable-service';
+import {DetailProjetComponent} from '../detail/detail-projet-component';
+import {Livrable, LivrableService} from '../../livrable/service/livrable-service';
+import {ActivatedRoute} from '@angular/router';
+import {ListeLivrableComponent} from '../../livrable/list/liste-livrable-component';
 
 @Component({
   selector: 'app-liste-projet-dispo',
-  templateUrl: './liste-projet-component.html',
-  imports: [Create],
-  styleUrls: ['./liste-projet-component.scss']
+  templateUrl: './liste-projet-dispo-component.html',
+  imports: [Create, DetailProjetComponent, ListeLivrableComponent],
+  styleUrls: ['./liste-projet-dispo-component.scss']
 })
-export class ListeProjetComponent implements OnInit {
+export class ListeProjetDispoComponent implements OnInit {
   projets: Projet[] = [];
   monProjet: Projet | null = null;
 
@@ -22,17 +25,19 @@ export class ListeProjetComponent implements OnInit {
   isFormLivrableModalOpen = false;
 
   livrables: Livrable[] = [];
+  protected ouvrirDetailProjet = false;
 
   constructor(
     private readonly projetService: ProjetService,
     private readonly authService: AuthService,
     private readonly etudiantService: EtudiantService,
     private readonly livrableService: LivrableService,
+    private readonly route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
     this.loadProjetsNonAttribues();
-    //this.loadLivrables(this.projetId)
+
   }
 
   // Charger tous les projets non attribués ou projet de l'utilisateur
@@ -40,24 +45,30 @@ export class ListeProjetComponent implements OnInit {
     const currentUser = this.authService.getUtilisateurId();
     if (!currentUser) return;
 
-    this.projetService.getProjetDispo(currentUser).subscribe({
+    this.projetService.getProjetDispo().subscribe({
       next: (data) => {
-        if (data.length === 1 && data[0].etudiant === currentUser) {
 
-          // L'étudiant a déjà un projet
+        if (data.length === 1 && data[0].etudiant!.id === currentUser) {
           this.monProjet = data[0];
           this.projets = [data[0]];
 
-          if (this.monProjet?.id) {
-            localStorage.setItem('projetId', String(this.monProjet.id));
-            console.log("🔥 Projet ID enregistré :", this.monProjet.id);
-          }
-        } else {
-
+          // 🔥 ID envoyé automatiquement
+          this.selectedProjetId = data[0].id!;
+          localStorage.setItem('projetId', String(data[0].id));
+          console.log("Projet ID envoyé :", this.monProjet.etudiant);
+        }
+        else {
           this.monProjet = null;
           this.projets = data;
+
+          // 🔥 ID du premier projet par défaut
+          if (this.projets.length > 0) {
+            this.selectedProjetId = this.projets[0].id!;
+            console.log("🔥 Premier projet ID :", this.selectedProjetId);
+          }
         }
-        console.log('Projets chargés :', this.projets);
+
+        console.log('Projets chargés :', this.monProjet);
       },
       error: (err) => console.error('Erreur chargement projets :', err)
     });
@@ -115,5 +126,20 @@ export class ListeProjetComponent implements OnInit {
       },
       error: (err) => console.error('Erreur lors du chargement des livrables', err)
     });
+  }
+
+  DetailProjetModal(id: number ) {
+    this.selectedProjetId = id;
+    this.ouvrirDetailProjet = true
+
+  }
+  onBackdropClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (target.classList.contains('modal')) {
+      this.fermerDetailProjet();
+    }
+  }
+  fermerDetailProjet() {
+    this.ouvrirDetailProjet = false;
   }
 }

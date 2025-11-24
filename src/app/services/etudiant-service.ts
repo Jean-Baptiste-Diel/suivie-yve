@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Commentaire} from './commentaire-service';
-import {Livrable} from './livrable-service';
 import {Observable} from 'rxjs';
 export interface Etudiant{
   id?: number;

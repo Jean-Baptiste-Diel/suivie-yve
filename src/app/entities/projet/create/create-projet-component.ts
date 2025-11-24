@@ -9,10 +9,10 @@ import {Encadrant, EncadrantService} from '../../encadrant/service/encadrant-ser
         FormsModule,
         ReactiveFormsModule
     ],
-  templateUrl: './createProjet.html',
-  styleUrl: './createProjet.scss'
+  templateUrl: './create-projet-component.html',
+  styleUrl: './create-projet-component.scss'
 })
-export class CreateProjet implements OnInit {
+export class CreateProjetComponent implements OnInit {
   encadrants: Encadrant[] = [];
   projetForm: FormGroup;
   constructor(private readonly formBuilder: FormBuilder,

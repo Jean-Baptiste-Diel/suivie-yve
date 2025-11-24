@@ -1,20 +1,18 @@
 import {Component, OnInit} from '@angular/core';
-import {Livrable, LivrableService} from '../../../services/livrable-service';
 import {ActivatedRoute, RouterLink} from '@angular/router';
-import {NgIf} from '@angular/common';
+import {Livrable, LivrableService} from '../service/livrable-service';
 
 @Component({
   selector: 'app-detail',
   imports: [
     RouterLink,
-    NgIf
   ],
   templateUrl: './detail.html',
   styleUrl: './detail.scss'
 })
 export class Detail implements OnInit {
   livrable: Livrable | null = null
-  constructor(private livrableService: LivrableService, private route: ActivatedRoute) {
+  constructor(private readonly livrableService: LivrableService, private readonly route: ActivatedRoute) {
   }
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));

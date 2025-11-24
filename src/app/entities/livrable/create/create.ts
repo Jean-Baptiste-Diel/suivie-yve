@@ -1,8 +1,6 @@
 import {Component, Input, numberAttribute} from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import {LivrableService} from '../../../services/livrable-service';
-
-
+import {LivrableService} from '../service/livrable-service';
 
 @Component({
   selector: 'app-create-livrable',
@@ -20,7 +18,8 @@ export class Create {
   ) {
     this.livrableForm = this.formBuilder.group({
       titre: ['', Validators.required],
-      fichier: ['', Validators.required]
+      fichier: ['', Validators.required],
+      option: ['', Validators.required]
     });
   }
   selectedFile!: File;
@@ -40,6 +39,7 @@ export class Create {
     const formData = new FormData();
     formData.append("titre", form.value.titre);
     formData.append("fichier", this.selectedFile);
+    formData.append("option", form.value.option);
     formData.append("projetId", this.projetId.toString());
     if (!this.selectedFile) {
       alert('Veuillez sélectionner un fichier.');

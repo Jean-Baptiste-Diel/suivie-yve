@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {Livrable} from './livrable-service';
 import {HttpClient} from '@angular/common/http';
 export interface Jury{
   id: number;

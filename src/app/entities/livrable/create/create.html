@@ -1,5 +1,4 @@
-
-  <div class="modal-content" [class.show]="isModalOpen">
+ <div class="modal-content" [class.show]="isModalOpen">
     <h2>Nouveau Livrable</h2>
     <div class="card-body">
       <form [formGroup]="livrableForm" (ngSubmit)="ajouterLivrable(livrableForm)" class="create-form">
@@ -22,6 +21,14 @@
             (change)="onFileSelected($event)"
             formControlName="fichier"
             placeholder="Nom du fichier">
+        </div>
+
+        <div class="form-group">
+          <label for="fichier">Type de livrable</label>
+          <select id="option" formControlName="option">
+            <option value="plan">Plan memoire</option>
+            <option value="introduction">Introduction memoire</option>
+          </select>
         </div>
 
         <div class="create-actions">

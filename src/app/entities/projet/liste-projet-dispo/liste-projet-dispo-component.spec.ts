@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 // Correct the import path if the file is named 'liste-projet-dispo.component.ts'
-import { ListeProjetComponent } from './liste-projet-component';
+import { ListeProjetDispoComponent } from './liste-projet-dispo-component';
 
 describe('ListCommentaire', () => {
-  let component: ListeProjetComponent;
-  let fixture: ComponentFixture<ListeProjetComponent>;
+  let component: ListeProjetDispoComponent;
+  let fixture: ComponentFixture<ListeProjetDispoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ListeProjetComponent]
+      imports: [ListeProjetDispoComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ListeProjetComponent);
+    fixture = TestBed.createComponent(ListeProjetDispoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

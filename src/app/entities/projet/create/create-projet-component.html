@@ -26,21 +26,17 @@
     <label for="encadrant">Encadrant <span class="required">*</span></label>
     <select id="encadrant" formControlName="encadrant">
       <option value="">-- Choisir un encadrant --</option>
-      @for (enc of encadrants; track enc.id){
-        <option [value]="enc.id">
-          {{ enc.nom }} - {{ enc.specialite }}
+      @for (encadrant of encadrants; track encadrant.id){
+        <option [value]="encadrant.id">
+          {{ encadrant.nom }} - {{ encadrant.specialite }}
         </option>
       }
-      <option *ngFor="let enc of encadreurs" [value]="enc.id">
-        {{ enc.nom }} - {{ enc.specialite }}
-      </option>
     </select>
   </div>
-
   <!-- Boutons -->
   <div class="create-actions">
-    <button type="submit" [disabled]="!projetForm.valid" class="btn btn-create">🚀 Créer le projet</button>
-    <button type="button" (click)="goBack()" class="btn btn-cancel">↩️ Annuler</button>
+    <button type="submit" [disabled]="!projetForm.valid" class="btn btn-create">Créer le projet</button>
+    <button type="button" (click)="goBack()" class="btn btn-cancel">Annuler</button>
   </div>
 
 </form>

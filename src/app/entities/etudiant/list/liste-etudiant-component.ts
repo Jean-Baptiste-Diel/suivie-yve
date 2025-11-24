@@ -11,10 +11,10 @@ interface ConnexionResponse {
     imports: [
         NgForOf
     ],
-  templateUrl: './list.html',
-  styleUrl: './list.scss'
+  templateUrl: './liste-etudiant-component.html',
+  styleUrl: './liste-etudiant-component.scss'
 })
-export class List implements OnInit {
+export class ListeEtudiantComponent implements OnInit {
   public etudiants: Etudiant[] = [];
   private role = '';
   constructor(private etudiantService: EtudiantService,) {
