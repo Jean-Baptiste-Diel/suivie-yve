@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Encadrant} from '../../encadrant/service/encadrant-service';
 import {Etudiant} from '../../etudiant/service/etudiant-service';
+import {Livrable} from '../../livrable/service/livrable-service';
 export interface Projet {
   id?: number;
   titre: string;
@@ -12,7 +13,8 @@ export interface Projet {
   statut?:string;
   encadrant?:Encadrant;
   soutenance?:any;
-  etudiant?: Etudiant;
+  etudiant?: Etudiant | null;
+  livrables?: Livrable [];
   date_soumission?: any;
 }
 
@@ -38,8 +40,9 @@ export class ProjetService {
   projetsValider() {
     return this.http.get<Projet[]>(`${this.apiUrl}/projet-valider/`);
   }
+  // Liste des projets a encadrer ou encadrer: pour encadrants
   projetsEncadrer() {
-    return this.http.get<any>(`${this.apiUrl1}/projets-encadrer/`);
+    return this.http.get<Projet>(`${this.apiUrl1}/projets-encadrer/`);
   }
   // récupérer des projets disponible pour l'etudiant
   getProjetDispo(): Observable<Projet[]>{

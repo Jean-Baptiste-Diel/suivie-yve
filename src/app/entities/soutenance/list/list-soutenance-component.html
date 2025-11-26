@@ -1,12 +1,9 @@
 <div class="toolbar">
-  <button class="btn btn-list" [class.active]="activeSection === 'listeSoutenance'"
-          (click)="setActiveSection('listeSoutenance')">Soutenance prevue</button>
+  <button class="btn btn-list" [class.active]="activeSection === 'listeSoutenance'" (click)="setActiveSection('listeSoutenance')">Soutenance prevue</button>
 
-  <button class="btn btn-list" [class.active]="activeSection === 'planifier'"
-          (click)="setActiveSection('planifier')">Planifier soutenance</button>
+  <button class="btn btn-list" [class.active]="activeSection === 'planifier'" (click)="setActiveSection('planifier')">Planifier soutenance</button>
 
-  <button class="btn btn-list"
-          (click)="telechagerPDF()">Telecharger le PDF</button>
+  <button class="btn btn-list" (click)="telechagerPDF()">Telecharger le PDF</button>
 </div>
 
 @if (activeSection === 'listeSoutenance'){
@@ -14,12 +11,11 @@
   @if (soutenances.length === 0){
     <div class="empty-state">
       <div class="empty-icon">📁</div>
-      <h3>Aucun projet trouvé</h3>
+      <h3>Aucune soutenance trouvé</h3>
     </div>
   }
   <full-calendar [options]="calendarOptions"></full-calendar>
 }
-
 @if (activeSection === 'planifier'){
   <app-create-soutenance></app-create-soutenance>
 }

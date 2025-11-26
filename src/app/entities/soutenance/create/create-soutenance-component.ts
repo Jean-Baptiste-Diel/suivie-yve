@@ -5,7 +5,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 
-// <-- importer les types depuis core
+// <-- importer les types depuis service
 import { CalendarOptions, DateSelectArg, DateSpanApi } from '@fullcalendar/core';
 
 @Component({

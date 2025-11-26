@@ -12,23 +12,20 @@
       <p><strong>Description :</strong> {{ projet.description }}</p>
       <p><strong>Niveau :</strong> {{ projet.niveau }}</p>
       <p><strong>Statut :</strong> {{ projet.statut }}</p>
-      @if (projet.etudiants?.length > 0){
+      @if (projet.etudiant) {
         <div>
-          <p><strong>Étudiants :</strong></p>
-          <ul>
-            @for (etudiant of projet.etudiants; track etudiant.id){
-              <li>
-                {{ etudiant.prenom }} {{ etudiant.nom }} ({{ etudiant.email }})
-              </li>
-            }
-          </ul>
+          <p><strong>Étudiant :</strong></p>
+          <p>
+            {{ projet.etudiant.prenom }} {{ projet.etudiant.nom }}
+            {{ projet.etudiant.email }}
+          </p>
         </div>
-      }
-      @if (!projet.etudiants || projet.etudiants.length === 0){
+      } @else {
         <div>
           Aucun étudiant associé pour ce projet.
         </div>
       }
+
       @if (projet.statut === 'termine') {
         <button (click)="DetailProjetModal(projet.id)">Consulter</button>
       } @else {
@@ -40,6 +37,6 @@
 <div class="modal" [class.show]="ouvrirDetailProjet" (click)="onBackdropClick($event)">
   <div class="modal-content" (click)="$event.stopPropagation()">
     <span class="close" (click)="fermerDetailProjet()">&times;</span>
-    <app-detail-projet-component [projetId]="selectedProjetId"></app-detail-projet-component>
+    <app-detail-projet-component [projetId]="selectedProjetId">></app-detail-projet-component>
   </div>
 </div>

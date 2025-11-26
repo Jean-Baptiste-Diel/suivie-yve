@@ -1,0 +1,46 @@
+<div class="container">
+  @if (!monProjet) {
+    <h2>Projets disponibles</h2>
+  } @else {
+    <h2>Mon projet</h2>
+  }
+  @for (projet of projets; track projet.id) {
+    <div class="projet-row">
+      <p><strong>Titre:</strong> {{ projet?.titre }}</p>
+      <p><strong>Niveau:</strong> {{ projet?.niveau }}</p>
+      <p><strong>Encadreur:</strong> {{ projet.encadrant!.nom }}</p>
+      <div class="actions">
+        <button (click)="DetailProjetModal(projet.id!)">Détails</button>
+
+        @if (!monProjet) {
+          <button (click)="lier(projet)">S'attribuer</button>
+        }
+        @if (projet.statut !== 'disponible'){
+        <button (click)="ouvrirFormLivrable(projet.id)">Ajouter un livrable</button>}
+      </div>
+    </div>
+  }
+</div>
+
+@if (projets.length === 0){
+  <p>Aucun projet disponible</p>
+}
+<!-- MODAL AJOUTER LIVRABLE -->
+<div class="modal" [class.show]="isOpen" (click)="onBackdropClick($event)">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <span class="close" (click)="closeFormLivrableModal()">&times;</span>
+    <app-create-livrable [projetId]="selectedProjetId"></app-create-livrable>
+  </div>
+</div>
+
+<!-- MODAL DETAIL PROJETS -->
+<div class="modal" [class.show]="ouvrirDetailProjet" (click)="onBackdropClick($event)">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <span class="close" (click)="fermerDetailProjet()">&times;</span>
+    <app-detail-projet-component [projetId]="selectedProjetId"></app-detail-projet-component>
+  </div>
+</div>
+@if (selectedProjetId){
+  <app-liste-livrable [projetId]="selectedProjetId"></app-liste-livrable>
+}
+

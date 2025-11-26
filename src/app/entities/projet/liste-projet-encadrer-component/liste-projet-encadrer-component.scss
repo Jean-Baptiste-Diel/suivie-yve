@@ -1,51 +1,107 @@
+/* Container général */
 .projets-container {
-  padding: 20px;
-
-  .projet-card {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 15px;
-    background-color: #f9f9f9;
-
-    h3 {
-      margin-top: 0;
-    }
-
-    ul {
-      padding-left: 20px;
-    }
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
 }
+
+/* Carte projet */
+.projet-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Titre projet */
+.projet-card h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+/* Description */
+.projet-card p {
+  margin: 4px 0;
+}
+
+/* Niveau et Statut sur la même ligne */
+.projet-info {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+/* Étudiant */
+.projet-card .etudiant {
+  margin-top: 8px;
+  padding: 8px;
+  background-color: #f7f7f7;
+  border-left: 4px solid #4caf50;
+  border-radius: 4px;
+}
+
+/* Boutons */
+.projet-card button {
+  margin-top: 12px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #2196f3;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.projet-card button:hover {
+  background-color: #1976d2;
+}
+
+/* Modal */
 .modal {
-  display: none; /* caché par défaut */
   position: fixed;
-  z-index: 10000;
-  left: 0;
   top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  justify-content: center;
+  display: none; /* caché par défaut */
   align-items: center;
+  justify-content: center;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1000;
 }
 
 .modal.show {
-  display: flex; /* visible quand .show est ajouté */
+  display: flex;
 }
 
 .modal-content {
   background-color: #fff;
-  color: #000;
-  padding: 20px;
+  padding: 24px;
   border-radius: 8px;
-  width: 400px;
-  max-width: 90%;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  max-width: 700px;
+  width: 90%;
+  position: relative;
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
-.close {
-  float: right;
+.modal-content .close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
   font-size: 24px;
   cursor: pointer;
+  color: #555;
+}
+
+/* Exemple pour mettre Niveau et Statut dans le HTML */
+.projet-info p {
+  margin: 0;
+  font-weight: 500;
 }

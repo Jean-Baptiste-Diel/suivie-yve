@@ -4,7 +4,8 @@ import {HttpClient} from '@angular/common/http';
 export interface Livrable {
   id?: number;
   titre: string;
-  fichier: File;
+  fichier?: string | null;
+  valider: boolean;
   option: string;
   projet_id?: number;
   date_soumission?: any;
@@ -28,9 +29,15 @@ export class LivrableService {
   getById(id: number): Observable<Livrable> {
     return this.http.get<Livrable>(`${this.apiUrl}/${id}/`);
   }
-
   // Mettre à jour un livrable
   update(id: number, livrable: Livrable): Observable<Livrable> {
     return this.http.put<Livrable>(`${this.apiUrl}/${id}/`, livrable);
+  }
+  // Supprimer un livrable par ID
+  delete(id: number | undefined): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}/supprimer/`);
+  }
+  validerLivrable(id: number | undefined) {
+    return this.http.patch(`${this.apiUrl}/${id}/valider/`, {})
   }
 }

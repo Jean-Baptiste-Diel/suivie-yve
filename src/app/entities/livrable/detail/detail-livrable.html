@@ -1,0 +1,53 @@
+<div class="details-container">
+  <div class="details-card">
+    <div class="card-header">
+      <h2>Détails du Livrable</h2>
+      <div class="badge">ID: {{ livrable?.option }}</div>
+    </div>
+    <div class="card-body">
+      @if (!livrable){
+        <div class="loading-details">
+          <div class="spinner"></div>
+          <p>Chargement des détails...</p>
+        </div>
+      } @else {
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">Titre:</span>
+            <span class="info-value">{{ livrable.titre }}</span>
+          </div>
+
+          <div class="info-item">
+            <span class="info-label">Fichier :</span>
+
+            @if (livrable.fichier) {
+              <a
+                class="info-value"
+                [href]="livrable.fichier"
+                download
+                target="_blank"
+              >
+                📄 Télécharger le fichier
+              </a>
+            } @else {
+              <span class="info-value empty">
+      Aucun fichier
+    </span>
+            }
+          </div>
+
+        </div>
+      }
+      @if (livrable){
+        <div class="details-actions">
+          <a [routerLink]="['/edit', livrable.id]" class="btn btn-edit">
+            ✏️ Modifier
+          </a>
+          <a routerLink="/list" class="btn btn-back">
+            ↩️ Retour à la liste
+          </a>
+        </div>
+      }
+    </div>
+  </div>
+</div>

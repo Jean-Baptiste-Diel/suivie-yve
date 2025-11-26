@@ -25,8 +25,12 @@ export class ListeLivrableComponent implements OnInit, OnChanges {
   loadLivrables(projetId: number) {
     this.livrableService.getAll(projetId).subscribe({
       next: (data) => {
-        this.livrables = data;
-        console.log('Livrables récupéré :', data);
+        // On ajoute le préfixe de l'URL pour chaque livrable
+        this.livrables = data.map(l => ({
+          ...l,
+          fichier: l.fichier ? `http://127.0.0.1:8000${l.fichier}` : null
+        }));
+        console.log('Livrables récupérés :', this.livrables);
       },
       error: (err) => console.error('Erreur lors du chargement des livrables', err)
     });
@@ -37,7 +41,14 @@ export class ListeLivrableComponent implements OnInit, OnChanges {
     }
   }
   deleteLivrable(id?: number) {
-    if (!id) return console.warn('id du livrable manquant');
-    // Appel service pour supprimer
+    if (!confirm('Voulez-vous vraiment supprimer ce livrable ?')) return;
+    this.livrableService.delete(id).subscribe({
+      next: () => {
+        // Supprime le livrable de la liste locale
+        this.livrables = this.livrables.filter(l => l.id !== id);
+        console.log('Livrable supprimé avec succès');
+      },
+      error: (err) => console.error('Erreur lors de la suppression du livrable', err)
+    });
   }
 }

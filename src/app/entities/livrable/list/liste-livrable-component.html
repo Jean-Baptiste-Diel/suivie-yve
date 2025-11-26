@@ -18,7 +18,9 @@
           @for (livrable of livrables; track livrable.id) {
             <tr>
               <td>{{ livrable.titre }}</td>
-              <td>{{ livrable.option }}</td>
+              <td [style.color]="livrable.valider ? 'green' : 'red'">
+                {{ livrable.option }}
+              </td>
               <td>
                 <a [href]="livrable.fichier" target="_blank">
                   Télécharger

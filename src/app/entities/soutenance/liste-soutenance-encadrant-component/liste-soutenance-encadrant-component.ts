@@ -14,6 +14,7 @@ import {FullCalendarModule} from '@fullcalendar/angular';
   styleUrl: './liste-soutenance-encadrant-component.scss'
 })
 export class ListeSoutenanceEncadrantComponent implements OnInit {
+  constructor(private readonly soutenanceService: SoutenanceService) {}
   calendarOptions: CalendarOptions = {
     plugins: [dayGridPlugin, interactionPlugin],
     initialView: 'dayGridMonth',
@@ -31,23 +32,20 @@ export class ListeSoutenanceEncadrantComponent implements OnInit {
     }
   };
 
-  constructor(private readonly soutenanceService: SoutenanceService) {}
   ngOnInit() {
     this.soutenanceService.listeSoutenances().subscribe(data => {
       const events = data.map(s => ({
-        title: s.projet_titre,          // Titre du projet
-        date: s.date,                   // Date de la soutenance
+        title: s.projet_titre,
+        date: s.date,
         extendedProps: {
-          salle: s.salle?.nom || 'N/A', // Salle
-          jury: s.jury?.map((j: { specialite: any; }) => j.specialite) || [] // Liste des spécialités du jury
+          salle: s.salle?.nom || 'N/A',
+          jury: s.jury?.map((j: { nom: any; }) => j.nom) || []
         }
       }));
-
       this.calendarOptions = {
         ...this.calendarOptions,
         events: events
       };
-
       console.log(this.calendarOptions);
     });
 

@@ -17,6 +17,8 @@
 @for (projet of projets; track projet.id){
   <div class="user-row">
     <p> Titre: {{ projet.titre }}</p>
+    <p> Encacrant: {{ projet.encadrant?.nom }}</p>
+    <p> Niveau: {{ projet.niveau }}</p>
     <button (click)="DetailModal(projet.id!)">
       voir
     </button>
@@ -37,7 +39,7 @@
   <app-projet-valider-component></app-projet-valider-component>
 }
 <div class="modal"
-     [class.show]="ouvrirDetailProjet"
+     [class.show]="ouvrirPlannifierSoutenance"
      (click)="onBackdropClick($event)">
   <div class="modal-content" (click)="$event.stopPropagation()">
     <span class="close" (click)="fermerPlanifierSoutenance()">&times;</span>

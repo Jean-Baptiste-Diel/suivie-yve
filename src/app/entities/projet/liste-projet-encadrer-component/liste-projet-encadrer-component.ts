@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ProjetService} from '../service/projet-service';
-import {DetailProjetComponent} from '../detail/detail-projet-component';
+import {DetailProjetComponent} from '../../encadrant/detail-projet-component/detail-projet-component';
 
 @Component({
   selector: 'app-liste-projet-encadrer-component',
@@ -22,28 +22,11 @@ export class ListeProjetEncadrerComponent implements OnInit {
 
   loadProjets(): void {
     this.projetService.projetsEncadrer().subscribe({
-      next: (projets) => {
-        // projets est un tableau venant du backend
-        // Exemple : [{id, titre, description, etudiants: [{nom, prenom, email}, ...]}, ...]
-        console.log('Projets récupérés:', projets);
-
-        // Tu peux stocker les projets dans une variable du composant pour les afficher
-        this.projets = projets;
-
-        // Si tu veux mapper pour un affichage spécifique, par ex. FullCalendar ou tableau
-        const projetsAffichage = projets.map((p: { titre: any; description: any; niveau: any; statut: any; etudiants: any[]; }) => ({
-          titre: p.titre,
-          description: p.description,
-          niveau: p.niveau,
-          statut: p.statut,
-          etudiants: p.etudiants.map((e: { prenom: any; nom: any; }) => `${e.prenom} ${e.nom}`)
-        }));
-
-        console.log('Projets formatés pour affichage:', projetsAffichage);
+      next: (data) => {
+        console.log("Données projets :", data);
+        this.projets = data;
       },
-      error: (err) => {
-        console.error('Erreur lors de la récupération des projets:', err);
-      }
+      error: (err) => console.error("Erreur :", err)
     });
   }
 

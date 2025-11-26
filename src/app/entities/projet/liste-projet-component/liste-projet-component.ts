@@ -21,7 +21,8 @@ export class ListeProjetComponent implements OnInit {
   ouvrirDetailProjet = false;
   activeSection: string = 'listeProjet';
   protected selectedProjetId: any;
-  constructor(private projetService: ProjetService,) {
+  protected ouvrirPlannifierSoutenance = false;
+  constructor(private readonly projetService: ProjetService,) {
   }
   ngOnInit() {
     this.loadProjet()
@@ -43,9 +44,10 @@ export class ListeProjetComponent implements OnInit {
   }
   DetailModal(id:number){
     this.selectedProjetId = id;
+    this.ouvrirDetailProjet = true
   }
   fermerDetailProjet() {
-
+    this.ouvrirDetailProjet = false;
   }
 
   fermerPlanifierSoutenance() {

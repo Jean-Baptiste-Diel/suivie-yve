@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {Projet, ProjetService} from '../service/projet-service';
-import {DetailProjetComponent} from '../detail/detail-projet-component';
+import {DetailProjetComponent} from '../../encadrant/detail-projet-component/detail-projet-component';
 
 @Component({
   selector: 'app-projet-valider-component',
   imports: [
-    DetailProjetComponent
+    DetailProjetComponent,
   ],
   templateUrl: './projet-valider-component.html',
   styleUrl: './projet-valider-component.scss'

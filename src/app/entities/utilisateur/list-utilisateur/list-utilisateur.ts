@@ -1,6 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {Navigation} from '../../../dashboard/user/supervisor-dashboard/navigation/navigation';
-import {UtilisateurComponent} from '../utilisateur-component';
+import {Component, OnInit} from '@angular/core';import {UtilisateurComponent} from '../utilisateur-component';
 import {UtilisateurDetail} from '../utilisateur-detail/utilisateur-detail';
 import {IUtilisateur, UtilisateurService} from '../service/utilisateur-service';
 import {CommonModule} from '@angular/common';
