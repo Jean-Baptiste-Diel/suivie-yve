@@ -1,0 +1,27 @@
+
+<form class="formulaire" [formGroup]="connexionForm" (ngSubmit)="seConnecter(connexionForm)" novalidate>
+  <h2>Connexion</h2>
+  <div class="form-group">
+    <label for="identifiant">
+      <input id="identifiant" placeholder="identifiant"  formControlName="identifiant" [class.is-invalid]="identifiant?.invalid && (identifiant?.dirty || identifiant?.touched)">
+    </label>
+    @if (identifiant?.invalid && (identifiant?.dirty || identifiant?.touched)){
+      <div>
+        @if (identifiant?.errors?.['required']) {<div>L'identifiant est requis</div>}
+        @if (identifiant?.errors?.['identifiant']) {<div>Veuillez entrer un identifiant valide</div>}
+      </div>
+    }
+  </div>
+  <div class="form-group">
+    <label for="motDePasse">
+      <input type="password" id="motDePasse" placeholder="mot de passe" formControlName="motDePasse" [class.is-invalid]="motDePasse?.invalid && (motDePasse?.dirty || motDePasse?.touched)">
+    </label>
+    @if (motDePasse?.invalid && (motDePasse?.dirty || motDePasse?.touched)){
+      <div>
+        @if (motDePasse?.errors?.['required']) {<div>Le mot de passe est requis</div>}
+        @if (motDePasse?.errors?.['motDePasse']) {<div>Veuillez entrer un identifiant valide</div>}
+        </div>
+    }
+  </div>
+  <button type="submit" [disabled]="connexionForm.invalid">Se connecter</button>
+</form>

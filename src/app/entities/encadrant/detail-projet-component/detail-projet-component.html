@@ -1,0 +1,70 @@
+<div class="contenue">
+  <div class="info">
+    @if (projet) {
+      <div class="info-grid">
+
+        <!-- Informations générales -->
+        <div class="info-item">
+          <span class="info-label">Titre :</span>
+          <span class="info-value">{{ projet.titre }}</span>
+        </div>
+
+        <div class="info-item">
+          <span class="info-label">Description :</span>
+          <span class="info-value">{{ projet.description }}</span>
+        </div>
+
+        <div class="info-item">
+          <span class="info-label">Niveau :</span>
+          <span class="info-value">{{ projet.niveau }}</span>
+        </div>
+
+        <div class="info-item">
+          <span class="info-label">Statut :</span>
+          <span class="info-value">{{ projet.statut }}</span>
+        </div>
+
+        <!-- Étudiant -->
+        <div class="info-item">
+          <span class="info-label">Étudiant :</span>
+          <span class="info-value">
+        @if (projet.etudiant) {
+          {{ projet.etudiant.nom }} {{ projet.etudiant.prenom }}
+        } @else {
+          <span>Aucun étudiant assigné</span>
+        }
+      </span>
+        </div>
+      </div>
+      <!-- Livrables -->
+      <div class="info-item">
+        <span class="info-label">Livrables :</span>
+        @if (projet.livrables && projet.livrables.length > 0) {
+          <ul>
+            @for (livrable of projet.livrables; track livrable.id) {
+              <li>
+                <b>{{ livrable.titre }}</b> - {{ livrable.date_soumission }}
+                <span [style.color]="livrable.valider ? 'green' : 'red'">
+                ({{ livrable.valider ? 'Validé' : 'Non validé' }})
+              </span>
+                @if (livrable.fichier) {
+                  <a [href]="livrable.fichier" target="_blank">Voir fichier</a>
+                }
+              </li>
+              <button (click)="ajouterCommentaire(livrable.id)">ajouter commentaire</button>
+              <button (click)="validerLIvrable(livrable.id)">valider</button>
+            }
+          </ul>
+        } @else {
+          <p>Aucun livrable pour ce projet.</p>
+        }
+      </div>
+      <form>
+        <input>
+        <button (click)="envoyerMessage(projet.etudiant?.id)">Envoyer un message</button>
+      </form>
+    }
+
+  </div>
+</div>
+

@@ -1,0 +1,26 @@
+<div class="dashboard">
+  <!-- Barre de navigation -->
+  <app-navigation [(activeSection)]="activeSection"></app-navigation>
+  <!-- Contenu principal -->
+  <main class="main-content">
+    @if (activeSection === 'Accueil'){
+      <div class="content-section">
+        <app-list-soutenance></app-list-soutenance>
+      </div>
+    }
+    @if (activeSection === 'Projet'){
+      <div class="content-section">
+        <app-liste-projet-component></app-liste-projet-component>
+      </div>
+    }
+    @if (activeSection === 'Utilisateur'){
+      <div class="content-section">
+        <app-list-utilisateur></app-list-utilisateur>
+      </div>
+    }
+    @if (activeSection === 'Messagerie'){
+      <div class="content-section">
+      </div>
+    }
+  </main>
+</div>
