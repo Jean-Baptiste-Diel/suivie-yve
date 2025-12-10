@@ -42,9 +42,6 @@ export class ListUtilisateur implements OnInit {
     this.selectedUtilisateurId = id;
     this.isOpen = true;
   }
-  loadDetailUtilisateur(id: number) {
-    console.log(id)
-  }
   fermerDetailUtilisateur() {
     this.isOpen = false
   }

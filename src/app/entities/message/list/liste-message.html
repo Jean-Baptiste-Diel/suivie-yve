@@ -1,0 +1,13 @@
+<div class="chat">
+  @for (message of messages; track message.id){
+    <div
+         [class.me]="message.expediteur === userId">
+      {{ message.contenu }}
+      <span class="date">{{ message.date_envoi | date:'shortTime' }}</span>
+    </div>
+  }
+
+
+  <input [(ngModel)]="message" placeholder="Écrire..." />
+  <button (click)="send()">Envoyer</button>
+</div>

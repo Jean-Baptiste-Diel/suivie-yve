@@ -25,7 +25,7 @@
         </div>
 
         <div class="details-actions">
-          <button type="submit" class="btn btn-msg">Envoyer message</button>
+          <button type="submit" (click)="envoyerMessageModal()" class="btn btn-msg">Envoyer message</button>
         </div>
 
       </div>
@@ -33,3 +33,12 @@
   </div>
 }
 
+<!-- Modal -->
+<div class="modal"
+     [class.show]="ouvrirEnvoyerMessage"
+     (click)="onBackdropClick($event)">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <span class="close" (click)="fermerEnvoyerMessage()">&times;</span>
+    <app-liste-message [utilisateurId]="utilisateurId"></app-liste-message>
+  </div>
+</div>

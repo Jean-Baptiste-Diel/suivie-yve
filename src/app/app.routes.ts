@@ -24,13 +24,13 @@ export const routes: Routes = [
   { path: 'etudiants/detail/:id', loadComponent: () => import('./entities/etudiant/detail/detail').then(m => m.Detail) },
 
   // CRUD Encadrants
-  { path: 'encadrants', loadComponent: () => import('./entities/encadrant/list/list').then(m => m.List) },
+  { path: 'encadrants', loadComponent: () => import('./entities/encadrant/list/list').then(m => m.ListeMessage) },
   { path: 'encadrants/create', loadComponent: () => import('./entities/encadrant/create/create').then(m => m.CreateProjetComponent) },
   { path: 'encadrants/edit/:id', loadComponent: () => import('./entities/encadrant/edit/edit').then(m => m.EditProjet) },
   { path: 'encadrants/detail/:id', loadComponent: () => import('./entities/encadrant/detail/detail').then(m => m.Detail) },
 
   // CRUD Administrateurs
-  { path: 'administrateurs', loadComponent: () => import('./entities/administrateur/list/list').then(m => m.List) },
+  { path: 'administrateurs', loadComponent: () => import('./entities/administrateur/list/list').then(m => m.ListeMessage) },
   { path: 'administrateurs/create', loadComponent: () => import('./entities/administrateur/create/create').then(m => m.CreateProjetComponent) },
   { path: 'administrateurs/edit/:id', loadComponent: () => import('./entities/administrateur/edit/edit').then(m => m.EditProjet) },
   { path: 'administrateurs/detail/:id', loadComponent: () => import('./entities/administrateur/detail/detail').then(m => m.Detail) },

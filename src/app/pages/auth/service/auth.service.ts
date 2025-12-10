@@ -27,18 +27,24 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/connexion/`, data).pipe(
       map(response => {
         if (response.access_token) {
-          // ✅ Sauvegarde du token
+
+          // 🔐 Sauvegarde du token
           localStorage.setItem('access_token', response.access_token);
           localStorage.setItem('refresh_token', response.refresh_token);
-          // ✅ Sauvegarde de l'utilisateur
+
+          // 👤 Sauvegarde de l'utilisateur
           localStorage.setItem('currentUser', JSON.stringify(response.user));
-          // ✅ Mise à jour du BehaviorSubject
           this.currentUserSubject.next(response.user);
+
+          // ⭐ Sauvegarde de l'ID utilisateur depuis le JWT
+          const payload = this.decodeToken(response.access_token);
+          localStorage.setItem('userId', payload.user_id); // <– CETTE LIGNE EST LA CLÉ
         }
         return response;
       })
     );
   }
+
   /** Récupérer le token JWT */
   getToken(): string | null {
     return localStorage.getItem('access_token');
